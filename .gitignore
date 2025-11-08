@@ -1,5 +1,5 @@
-./Debug
-./Release
-./vs
-./Spearman UCP
-./Spearman UCP.vcxproj.user
+Debug/
+Release/
+vs/
+"Spearman UCP/"
+"Spearman UCP.vcxproj.user"
