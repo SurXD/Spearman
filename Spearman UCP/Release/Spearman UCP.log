@@ -1,0 +1,51 @@
+﻿  dibutil.cpp
+  drawing.cpp
+  file.cpp
+  image.cpp
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(1,9): warning C4005: _CRT_SECURE_NO_WARNINGS: изменение макроопределения
+      D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(1,9):
+      "_CRT_SECURE_NO_WARNINGS" ранее объявлен в командной строке
+  
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(203,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(204,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(211,14): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(212,14): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(231,9): warning C4101: tries: неиспользованная локальная переменная
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(271,10): warning C4101: answer: неиспользованная локальная переменная
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(320,36): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(324,35): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(401,36): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\image.cpp(405,35): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+  misc.cpp
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\misc.cpp(418,9): warning C4101: i: неиспользованная локальная переменная
+  mouse.cpp
+  palette.cpp
+  text.cpp
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\text.cpp(13,9): warning C4005: _CRT_SECURE_NO_WARNINGS: изменение макроопределения
+      D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\text.cpp(13,9):
+      "_CRT_SECURE_NO_WARNINGS" ранее объявлен в командной строке
+  
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\text.cpp(359,19): warning C4018: <: несоответствие типов со знаком и без знака
+  winbgi.cpp
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\winbgi.cpp(11,9): warning C4005: _CRT_SECURE_NO_WARNINGS: изменение макроопределения
+      D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\winbgi.cpp(11,9):
+      "_CRT_SECURE_NO_WARNINGS" ранее объявлен в командной строке
+  
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\winbgi.cpp(134,14): warning C4101: actual_color: неиспользованная локальная переменная
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\winbgi.cpp(133,9): warning C4101: bgi_color: неиспользованная локальная переменная
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\winbgi.cpp(784,79): warning C4018: >: несоответствие типов со знаком и без знака
+  winthread.cpp
+D:\Downloads\Spearman UCP\Dependencies\WinBGIm\lib\winthread.cpp(349,9): warning C4101: i: неиспользованная локальная переменная
+  Hero.cpp
+  main.cpp
+D:\Downloads\Spearman UCP\src\main.cpp(121,14): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Room.cpp
+D:\Downloads\Spearman UCP\src\Room.cpp(33,26): warning C4244: -=: преобразование "double" в "int", возможна потеря данных
+D:\Downloads\Spearman UCP\src\Room.cpp(34,26): warning C4244: -=: преобразование "double" в "int", возможна потеря данных
+  Stage.cpp
+  Textures.cpp
+  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+  All 812 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  Spearman UCP.vcxproj -> D:\Downloads\Spearman UCP\Release\Spearman UCP.exe
