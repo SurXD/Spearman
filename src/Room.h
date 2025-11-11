@@ -1,6 +1,8 @@
 #pragma once
 #include"Textures.h"
 
+extern int current_floor;
+
 constexpr int MAX_ENEMY_COUNT = 4;
 constexpr int MAX_ROOMS_COUNT = 16;
 

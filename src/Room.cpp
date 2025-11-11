@@ -1,7 +1,8 @@
 #include"Textures.h"
 #include "Room.h"
 
-void Room::OpenRoom(){  // проверка на открытие дверей в комнат
+void Room::OpenRoom() // проверка на открытие дверей в комнат
+{
     door_open = true;
     for(int i = 0; i < current_enemy_count; i++)
     {
@@ -61,10 +62,10 @@ void Room::initRoom(int x, set_of_rooms a){ // создание комнаты
    { 
       int f = rand() % 3;
       if(x == 3) f = 3;
-      for(int i = 0; i < a.enemies_count[b*4 + f - 4]; i++)
+      for(int i = 0; i < a.enemies_count[current_floor * 4 + f - 4]; i++)
       {
-          enemies[i] = a.enemies_location[b*4 + f - 4][i];
-          current_enemy_count = a.enemies_count[b*4 + f - 4];
+          enemies[i] = a.enemies_location[current_floor * 4 + f - 4][i];
+          current_enemy_count = a.enemies_count[current_floor * 4 + f - 4];
       }
    }
 }

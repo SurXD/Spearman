@@ -20,9 +20,9 @@ class Hero {
          //fqq = 0;
          x = 298; 
          y = 300;
-         HP = 3;
+         HP = 3;//HP 3
          Speed = 12;
-         Damage = 10;
+         Damage = 1000;//DAMAGE 10
          LenghtSpear = 50;
          frameSpear = 0;
          directionSpear = 1;

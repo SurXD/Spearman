@@ -4,19 +4,21 @@ extern HWND hwnd;
 
 button but[BUTTON_MENU_COUNT];
 
-IMAGE* aboutScreen; //Изображение "О программе"
-IMAGE* rulesScreen; //Изображение "Правила"
+IMAGE* about_screen; //Изображение "О программе"
+IMAGE* rules_screen; //Изображение "Правила"
 IMAGE* screensaver; //Изображение "Заставка"
+IMAGE* main_screen; //Изображение "Меню игры"
 
-IMAGE* bmpBASIC[ENVIROMENT_OBJECTS_COUNT]; // массив для различных базовых изображений 
-IMAGE* bmpITEMS[ITEMS_COUNT]; // массив для изображения предметов и иконок предметов
-IMAGE* bmpEnemy[ENEMY_TYPE_COUNT]; // массив для изображения врагов 
+IMAGE* bmp_basic[ENVIROMENT_OBJECTS_COUNT]; // массив для различных базовых изображений 
+IMAGE* bmp_items[ITEMS_COUNT]; // массив для изображения предметов и иконок предметов
+IMAGE* bmp_enemy[ENEMY_TYPE_COUNT]; // массив для изображения врагов 
 
 void load_menu_sprites() // инициализация кнопок меню
 {
     screensaver = loadBMP("./Resources/Textures/Spearmanz.bmp");
-    aboutScreen = loadBMP("./Resources/Textures/rules.bmp");
-    rulesScreen = loadBMP("./Resources/Textures/about.bmp");
+    main_screen = loadBMP("./Resources/Textures/Spearman.bmp");
+    about_screen = loadBMP("./Resources/Textures/rules.bmp");
+    rules_screen = loadBMP("./Resources/Textures/about.bmp");
 
    char s[40];
    for(int i = 0; i < BUTTON_MENU_COUNT; i++)
@@ -33,11 +35,11 @@ void load_items_sprites()
     char s[40];
     for (int i = 0; i < ENVIROMENT_OBJECTS_COUNT; i++) {
         sprintf(s, "./Resources/Textures/pic%d.bmp", i);
-        bmpBASIC[i] = loadBMP(s);
+        bmp_basic[i] = loadBMP(s);
     }
     for (int i = 0; i < ITEMS_COUNT; i++) {
         sprintf(s, "./Resources/Textures/Item%d.bmp", i);
-        bmpITEMS[i] = loadBMP(s);
+        bmp_items[i] = loadBMP(s);
     }
 }
 
@@ -46,7 +48,7 @@ void load_enemy_sprites()
     char s[40];
     for (int i = 0; i < ENEMY_TYPE_COUNT; i++) {
         sprintf(s, "./Resources/Textures/enemy%d.bmp", i);
-        bmpEnemy[i] = loadBMP(s);
+        bmp_enemy[i] = loadBMP(s);
     }
 }
 
@@ -54,14 +56,12 @@ void draw_menu() // отрисовка кнопок меню
 {
    clearviewport();
 
-   IMAGE * bmp1 = loadBMP("./Resources/Textures/Spearman.bmp");//вынести в загрузку ресурсов
-   putimage(0, 0, bmp1, COPY_PUT);
+   putimage(0, 0, main_screen, COPY_PUT);
 
    for(int i = 0; i < BUTTON_MENU_COUNT; i++)
    {
         putimage(but[i].x , but[i].y, but[i].bmp, COPY_PUT);
    }
-   freeimage(bmp1);
 }
 
 int menu() // выбор пункта меню
@@ -87,17 +87,16 @@ int menu() // выбор пункта меню
    return 0;
 }
 
-void draw_end_game(int x){ // отрисока финального экрана
-   if(x < 0) putimage(0, 0, bmpBASIC[18], COPY_PUT);
-   else putimage(0, 0, bmpBASIC[19], COPY_PUT);
+void draw_end_game(int x)
+{ // отрисока финального экрана
+   if(x < 0) putimage(0, 0, bmp_basic[18], COPY_PUT);
+   else putimage(0, 0, bmp_basic[19], COPY_PUT);
    swapbuffers();
-   int f1 = 0;
-   //тут возврат в главное меню
-   while(f1 == 0){
-      if ((GetAsyncKeyState('Q') & 0x8000) && 
-         GetForegroundWindow() == hwnd)
-      {
-          f1 = 1;/*closegraph(); exit(0);*/
-      }
+   //это должно быть в другой части программы
+   bool clicked = false;
+   while(!clicked)
+   {
+       int c = getch();
+       if(c == 'Q' || c == 'q') clicked = true;
    }
 }

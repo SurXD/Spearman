@@ -3,7 +3,7 @@
 #include"Hero.h"
 #include"Stage.h"
 
-int b = 1; // этаж
+int current_floor = 1; // этаж
 set_of_rooms a; // пул комнат
 
 HWND hwnd;//текущее окно
@@ -53,7 +53,7 @@ void zastavka(){ // заставка игры
 
 void about(){ // об игре 
    clearviewport();
-   putimage(0, 0, aboutScreen, COPY_PUT);
+   putimage(0, 0, about_screen, COPY_PUT);
    swapbuffers();
    int f1 = 0;
    while(f1 == 0){
@@ -64,7 +64,7 @@ void about(){ // об игре
 
 void rules(){ // управление
    clearviewport();
-   putimage(0, 0, rulesScreen, COPY_PUT);
+   putimage(0, 0, rules_screen, COPY_PUT);
    swapbuffers();
    int f1 = 0;
    while(f1 == 0){
@@ -115,26 +115,27 @@ void init_set_of_rooms(Enemy normal[])
 
 void game(){ // игра
    int stagef;
-   b = 1;//почему то не было
+   current_floor = 1;//почему то не было
    srand(time(0));
    char s[40]{0};
    Enemy norm[7] = {
-      {298, 205, 100, 100, 4, bmpEnemy[0]},//ZOMBIE 
-      {298, 205, 200, 200, 6, bmpEnemy[1]}, //KNIGHT
-      {298, 205, 50, 50, 8, bmpEnemy[2]}, //NINJA
-      {298, 205, 1000, 1000, 5, bmpEnemy[3]}, //BOSS1
-      {298, 205, 700, 700, 7, bmpEnemy[4]}, //BOSS2
-      {298, 205, 200, 200, 9, bmpEnemy[5]}, //BOSS3
-      {298, 205, 1000, 1000, 9, bmpEnemy[6]}}; //BOSS4
+      {298, 205, 100, 100, 4, bmp_enemy[0]},//ZOMBIE 
+      {298, 205, 200, 200, 6, bmp_enemy[1]}, //KNIGHT
+      {298, 205, 50, 50, 8, bmp_enemy[2]}, //NINJA
+      {298, 205, 1000, 1000, 5, bmp_enemy[3]}, //BOSS1
+      {298, 205, 700, 700, 7, bmp_enemy[4]}, //BOSS2
+      {298, 205, 200, 200, 9, bmp_enemy[5]}, //BOSS3
+      {298, 205, 1000, 1000, 9, bmp_enemy[6]}}; //BOSS4
    init_set_of_rooms(norm);
    Room Room;
    Hero Hero;
    Stage Stage;
    Stage.initStage();
    Room.initRoom(4, a);
-   while(b > 0 && b < 5){
+   while(current_floor > 0 && current_floor < 5)
+   {
       clearviewport();
-      putimage(0, 0, bmpBASIC[17], TRANSPARENT_PUT);
+      putimage(0, 0, bmp_basic[17], TRANSPARENT_PUT);
       Stage.printDoorsAndItems(Room.get_open());
       Hero.DrawStats();
       Hero.DrawHero();
@@ -143,7 +144,7 @@ void game(){ // игра
       Stage.printMap();
       if(pause())
       {
-         std::string info = "Этаж: " + std::to_string(b);
+         std::string info = "Этаж: " + std::to_string(current_floor);
          setcolor(RED);
          outtextxy(700 / 2, 450 /2, "Пауза");
          outtextxy(700 / 2, 450 /2 + 30, info.c_str());
@@ -157,21 +158,21 @@ void game(){ // игра
       Hero.DamageMe(Room.getArr(), Room.get_num());
       delay(41);
       Hero.Move();
-      if(Hero.get_HP() < 1) b = -10;
+      if(Hero.get_HP() < 1) current_floor = -10;
       Room.OpenRoom();
       if(Room.get_open() == 1){
          stagef = Stage.StageMove(Hero.HeroDoor(Stage.getF(), Stage.getItemID()));
          if(stagef > 0){
             if(stagef == 10){
-               b++;
+               current_floor++;
                Stage.initStage();
             }
-            if(b < 5){ Room.initRoom(Stage.getRoom(), a); }
+            if(current_floor < 5){ Room.initRoom(Stage.getRoom(), a); }
          }
       }
       swapbuffers();
    }
-   draw_end_game(b);
+   draw_end_game(current_floor);
    //здесь происходил segmentation fault;
 }
 

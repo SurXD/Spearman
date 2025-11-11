@@ -13,7 +13,7 @@ void Stage::printMap(){ // отрисовка мини-карты
          else if(stagemap[i][j] == 1 || stagemap[i][j] == 3) setfillstyle(1, RED);
          else if(stagemap[i][j] == 2) setfillstyle(1, YELLOW);
          bar(671 + 21*i, 24 + 14*j, 680 + 21*i, 19 + 14*j);
-         if(stagemap[i][j] == 3) putimage(671 + 21*i, 20 + 14*j, bmpBASIC[0], TRANSPARENT_PUT);
+         if(stagemap[i][j] == 3) putimage(671 + 21*i, 20 + 14*j, bmp_basic[0], TRANSPARENT_PUT);
          }
       }
    }
@@ -122,21 +122,21 @@ void Stage::printDoorsAndItems(int x){ // отрисовка дверей и предметов
          if(stage[xi][yj + 1] != 0){ f[1] = 1; stagemap[xi][yj + 1] = stage[xi][yj + 1];}
       }
       if(x == 1){
-         if(f[3] == 1) putimage(300, 0, bmpBASIC[15], TRANSPARENT_PUT);
-         if(f[1] == 1) putimage(300, 412, bmpBASIC[13], TRANSPARENT_PUT);
-         if(f[2] == 1) putimage(592, 213, bmpBASIC[14], TRANSPARENT_PUT);
-         if(f[4] == 1) putimage(-1, 213, bmpBASIC[16], TRANSPARENT_PUT);
+         if(f[3] == 1) putimage(300, 0, bmp_basic[15], TRANSPARENT_PUT);
+         if(f[1] == 1) putimage(300, 412, bmp_basic[13], TRANSPARENT_PUT);
+         if(f[2] == 1) putimage(592, 213, bmp_basic[14], TRANSPARENT_PUT);
+         if(f[4] == 1) putimage(-1, 213, bmp_basic[16], TRANSPARENT_PUT);
       }
       else{
-         if(f[3] == 1) putimage(300, 0, bmpBASIC[11], TRANSPARENT_PUT);
-         if(f[1] == 1) putimage(300, 412, bmpBASIC[9], TRANSPARENT_PUT);
-         if(f[2] == 1) putimage(592, 213, bmpBASIC[10], TRANSPARENT_PUT);
-         if(f[4] == 1) putimage(-1, 213, bmpBASIC[12], TRANSPARENT_PUT);
+         if(f[3] == 1) putimage(300, 0, bmp_basic[11], TRANSPARENT_PUT);
+         if(f[1] == 1) putimage(300, 412, bmp_basic[9], TRANSPARENT_PUT);
+         if(f[2] == 1) putimage(592, 213, bmp_basic[10], TRANSPARENT_PUT);
+         if(f[4] == 1) putimage(-1, 213, bmp_basic[12], TRANSPARENT_PUT);
       }
    }
    if(stage[xi][yj] == 2){
       if(ItemID != 0) f[0] = 11;
-      if (ItemID != 0) putimage(315, 213, bmpITEMS[2*ItemID - 1], TRANSPARENT_PUT);
+      if (ItemID != 0) putimage(315, 213, bmp_items[2*ItemID - 1], TRANSPARENT_PUT);
    }
 }
 int Stage::StageMove(int x){ // перемещение игрока по этажу и взятие предмета

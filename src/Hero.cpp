@@ -29,7 +29,7 @@ int Hero::HeroDoor(int f[5], int ID){ // перемещение игрока между комнатами и вз
          if(ID == 2) Damage += 4;
          if(ID == 3) Speed += 2;
          if(ID == 4) LenghtSpear += 20;
-         Items[nextItem] = bmpITEMS[2*ID - 2];
+         Items[nextItem] = bmp_items[2*ID - 2];
          nextItem +=1;
          return 11;
       }
@@ -127,32 +127,32 @@ void Hero::DrawHero(){ // отрисовка игрока и его копья
          moveto(x + 25 + i, y + 36 - frameSpear);
          lineto(x + 25 + i, y + 36 - LenghtSpear - frameSpear);
          if(i == 2){ 
-            putimage(x + 22, y + 27 - LenghtSpear - frameSpear, bmpBASIC[directionSpear + 4], TRANSPARENT_PUT);
-            putimage(x, y, bmpBASIC[directionSpear], TRANSPARENT_PUT);
+            putimage(x + 22, y + 27 - LenghtSpear - frameSpear, bmp_basic[directionSpear + 4], TRANSPARENT_PUT);
+            putimage(x, y, bmp_basic[directionSpear], TRANSPARENT_PUT);
          }
       }
       if(directionSpear == 4){
          moveto(x + 30 - frameSpear, y + 50 + i);
          lineto(x + 30 - LenghtSpear - frameSpear, y + 50 + i);
          if(i == 2){ 
-            putimage(x + 21 - LenghtSpear - frameSpear, y + 47, bmpBASIC[directionSpear + 4], TRANSPARENT_PUT);
-            putimage(x, y, bmpBASIC[directionSpear], TRANSPARENT_PUT);
+            putimage(x + 21 - LenghtSpear - frameSpear, y + 47, bmp_basic[directionSpear + 4], TRANSPARENT_PUT);
+            putimage(x, y, bmp_basic[directionSpear], TRANSPARENT_PUT);
          }
       }
    }
    for(int i = 0; i < 3; i++){
       if(directionSpear == 1){
          if(i == 0){ 
-            putimage(x, y + 37 + LenghtSpear + frameSpear, bmpBASIC[directionSpear + 4], TRANSPARENT_PUT);
-            putimage(x, y, bmpBASIC[directionSpear], TRANSPARENT_PUT);
+            putimage(x, y + 37 + LenghtSpear + frameSpear, bmp_basic[directionSpear + 4], TRANSPARENT_PUT);
+            putimage(x, y, bmp_basic[directionSpear], TRANSPARENT_PUT);
          }
          moveto(x + 3 + i, y + frameSpear + 36);
          lineto(x + 3 + i, y + 36 + LenghtSpear + frameSpear);
       }
       if(directionSpear == 2){
           if(i == 0){ 
-            putimage(x + LenghtSpear + frameSpear + 1, y + 47, bmpBASIC[directionSpear + 4], TRANSPARENT_PUT);
-            putimage(x, y, bmpBASIC[directionSpear], TRANSPARENT_PUT);
+            putimage(x + LenghtSpear + frameSpear + 1, y + 47, bmp_basic[directionSpear + 4], TRANSPARENT_PUT);
+            putimage(x, y, bmp_basic[directionSpear], TRANSPARENT_PUT);
           }
          moveto(x + frameSpear, y + 50 + i);
          lineto(x + LenghtSpear + frameSpear, y + 50 + i);
