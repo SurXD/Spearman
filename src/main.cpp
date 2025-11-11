@@ -4,12 +4,14 @@
 #include"Stage.h"
 
 int b = 1; // этаж
-IMAGE * bmpBASIC[20]; // массив для различных базовых изображений 
-IMAGE * bmpITEMS[9]; // массив для изображения предметов и иконок предметов
-IMAGE * bmpEnemy[7]; // массив для изображения врагов 
 set_of_rooms a; // пул комнат
 
 HWND hwnd;//текущее окно
+
+int SCREEN_WIDTH = 800;
+int SCREEN_HEIGHT = 480;
+int OFFSET_X = 100;
+int OFFSET_Y = 100;
 
 void init(); // инициализация программы
 void zastavka(); // заставка игры
@@ -39,40 +41,36 @@ int main()
 }
 
 void init(){ // инициализация программы
-   initwindow(800, 480, "Spearman", 100, 100);
-   init_menu(); // инициализация кнопок меню
+   initwindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Spearman", OFFSET_X, OFFSET_Y);
+   load_menu_sprites(); // инициализация кнопок меню
+   load_items_sprites();
+   load_enemy_sprites();
 }
 void zastavka(){ // заставка игры
-   IMAGE * bmp1 = loadBMP("./Resources/Textures/Spearmanz.bmp");
-   putimage(0, 0, bmp1, COPY_PUT);
+   putimage(0, 0, screensaver, COPY_PUT);
    getch();
-   freeimage(bmp1);
 }
 
 void about(){ // об игре 
    clearviewport();
-   IMAGE * bmp1 = loadBMP("./Resources/Textures/about.bmp");
-   putimage(0, 0, bmp1, COPY_PUT);
+   putimage(0, 0, aboutScreen, COPY_PUT);
    swapbuffers();
    int f1 = 0;
    while(f1 == 0){
       if ((GetAsyncKeyState('Q') & 0x8000 )&& 
          GetForegroundWindow() == hwnd) f1 = 1;
    }
-   freeimage(bmp1);
 }
 
 void rules(){ // управление
    clearviewport();
-   IMAGE * bmp1 = loadBMP("./Resources/Textures/rules.bmp");
-   putimage(0, 0, bmp1, COPY_PUT);
+   putimage(0, 0, rulesScreen, COPY_PUT);
    swapbuffers();
    int f1 = 0;
    while(f1 == 0){
       if ((GetAsyncKeyState('Q') & 0x8000)&& 
          GetForegroundWindow() == hwnd) f1 = 1;
    }
-   freeimage(bmp1);
 }
 
 void init_set_of_rooms(Enemy normal[])
@@ -120,18 +118,6 @@ void game(){ // игра
    b = 1;//почему то не было
    srand(time(0));
    char s[40]{0};
-   for(int i = 0; i < 20; i++){
-      sprintf(s,"./Resources/Textures/pic%d.bmp", i);
-      bmpBASIC[i] = loadBMP(s);
-   }
-   for(int i = 0; i < 9; i++){
-      sprintf(s,"./Resources/Textures/Item%d.bmp", i);
-      bmpITEMS[i] = loadBMP(s);
-   }
-   for(int i = 0; i < 7; i++){
-      sprintf(s,"./Resources/Textures/enemy%d.bmp", i);
-      bmpEnemy[i] = loadBMP(s);
-   }
    Enemy norm[7] = {
       {298, 205, 100, 100, 4, bmpEnemy[0]},//ZOMBIE 
       {298, 205, 200, 200, 6, bmpEnemy[1]}, //KNIGHT

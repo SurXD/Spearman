@@ -1,11 +1,23 @@
 #include"Textures.h"
 
 extern HWND hwnd;
-constexpr int BUTTON_MENU_COUNT = 4;
+
 button but[BUTTON_MENU_COUNT];
 
-void init_menu() // инициализация кнопок меню
+IMAGE* aboutScreen; //Изображение "О программе"
+IMAGE* rulesScreen; //Изображение "Правила"
+IMAGE* screensaver; //Изображение "Заставка"
+
+IMAGE* bmpBASIC[ENVIROMENT_OBJECTS_COUNT]; // массив для различных базовых изображений 
+IMAGE* bmpITEMS[ITEMS_COUNT]; // массив для изображения предметов и иконок предметов
+IMAGE* bmpEnemy[ENEMY_TYPE_COUNT]; // массив для изображения врагов 
+
+void load_menu_sprites() // инициализация кнопок меню
 {
+    screensaver = loadBMP("./Resources/Textures/Spearmanz.bmp");
+    aboutScreen = loadBMP("./Resources/Textures/rules.bmp");
+    rulesScreen = loadBMP("./Resources/Textures/about.bmp");
+
    char s[40];
    for(int i = 0; i < BUTTON_MENU_COUNT; i++)
    {
@@ -15,6 +27,29 @@ void init_menu() // инициализация кнопок меню
         but[i].bmp = loadBMP(s);
    }
 }
+
+void load_items_sprites()
+{
+    char s[40];
+    for (int i = 0; i < ENVIROMENT_OBJECTS_COUNT; i++) {
+        sprintf(s, "./Resources/Textures/pic%d.bmp", i);
+        bmpBASIC[i] = loadBMP(s);
+    }
+    for (int i = 0; i < ITEMS_COUNT; i++) {
+        sprintf(s, "./Resources/Textures/Item%d.bmp", i);
+        bmpITEMS[i] = loadBMP(s);
+    }
+}
+
+void load_enemy_sprites()
+{
+    char s[40];
+    for (int i = 0; i < ENEMY_TYPE_COUNT; i++) {
+        sprintf(s, "./Resources/Textures/enemy%d.bmp", i);
+        bmpEnemy[i] = loadBMP(s);
+    }
+}
+
 void draw_menu() // отрисовка кнопок меню
 {
    clearviewport();
