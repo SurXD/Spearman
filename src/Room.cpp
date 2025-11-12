@@ -50,7 +50,7 @@ void Room::printEnemys(){ // отрисовка врагов
    }
 }
 void Room::initRoom(int x, set_of_rooms a){ // создание комнаты
-   if(x == 4 || x == 2)
+   if(x == 4 || x == 2)//начальная комната и комната с предметом
    {
       current_enemy_count = 0; door_open = true;
       for(int i = 0; i < 4; i++)
@@ -60,9 +60,9 @@ void Room::initRoom(int x, set_of_rooms a){ // создание комнаты
    }
    else
    { 
-      int f = rand() % 3;
-      if(x == 3) f = 3;
-      for(int i = 0; i < a.enemies_count[current_floor * 4 + f - 4]; i++)
+      int f = rand() % 3;//id комнаты этажа (кроме босса)
+      if(x == 3) f = 3;//если команта с боссом то f = 3
+      for(int i = 0; i < a.enemies_count[current_floor * 4 + f - 4]; i++)//проходимся по количеству врагов в комнате
       {
           enemies[i] = a.enemies_location[current_floor * 4 + f - 4][i];
           current_enemy_count = a.enemies_count[current_floor * 4 + f - 4];

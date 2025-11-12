@@ -15,8 +15,8 @@ struct Enemy
    IMAGE * bmp; // изображение врага
 }; // структура врага
 
-enum{ ZOMBIE = 0, KNIGHT, NINJA };
-enum{ BOSS1 = 3, BOSS2, BOSS3, BOSS4 };
+enum { ZOMBIE = 0, KNIGHT, NINJA };
+enum { BOSS1 = 3, BOSS2, BOSS3, BOSS4 };
 
 struct set_of_rooms
 {

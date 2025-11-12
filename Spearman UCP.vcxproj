@@ -144,6 +144,7 @@
     <ClCompile Include="Dependencies\WinBGIm\lib\winbgi.cpp" />
     <ClCompile Include="Dependencies\WinBGIm\lib\winthread.cpp" />
     <ClCompile Include="src\Hero.cpp" />
+    <ClCompile Include="src\input\winapi_input_manager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Room.cpp" />
     <ClCompile Include="src\Stage.cpp" />
@@ -157,6 +158,9 @@
     <ClInclude Include="Dependencies\WinBGIm\lib\winbgim.h" />
     <ClInclude Include="Dependencies\WinBGIm\lib\winbgitypes.h" />
     <ClInclude Include="src\Hero.h" />
+    <ClInclude Include="src\input\input_manager.h" />
+    <ClInclude Include="src\input\input_types.h" />
+    <ClInclude Include="src\input\winapi_input_manager.h" />
     <ClInclude Include="src\Room.h" />
     <ClInclude Include="src\Stage.h" />
     <ClInclude Include="src\Textures.h" />

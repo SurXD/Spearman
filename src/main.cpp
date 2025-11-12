@@ -13,8 +13,10 @@ int SCREEN_HEIGHT = 480;
 int OFFSET_X = 100;
 int OFFSET_Y = 100;
 
+enum class state{ SCREENSAVER, MAIN_MENU, ABOUT_SCREEN, RULES_SCREEN, RUNNING, PAUSE, GAME_OVER };
+
 void init(); // инициализация программы
-void zastavka(); // заставка игры
+void draw_screensaver(); // заставка игры
 void game(); // игра
 void about(); // об игре  
 void rules(); // управление и правила
@@ -24,7 +26,7 @@ int main()
 { // основная функция
    
    init();
-   zastavka();
+   draw_screensaver();
    hwnd = FindWindow(nullptr, "Spearman");
 
    int st = 0;
@@ -36,7 +38,6 @@ int main()
       else if(st == 2) about(); 
       else if(st == 3) rules();     
    } while(st != 4);
-   closegraph();
    return 0;
 }
 
@@ -46,15 +47,17 @@ void init(){ // инициализация программы
    load_items_sprites();
    load_enemy_sprites();
 }
-void zastavka(){ // заставка игры
+void draw_screensaver(){ // заставка игры
    putimage(0, 0, screensaver, COPY_PUT);
    getch();
 }
 
-void about(){ // об игре 
+void about() // об игре 
+{
    clearviewport();
    putimage(0, 0, about_screen, COPY_PUT);
    swapbuffers();
+
    int f1 = 0;
    while(f1 == 0){
       if ((GetAsyncKeyState('Q') & 0x8000 )&& 
@@ -67,6 +70,7 @@ void rules(){ // управление
    putimage(0, 0, rules_screen, COPY_PUT);
    swapbuffers();
    int f1 = 0;
+   //if(input->is_pressed(key::Q)) state = MAIN_MENU
    while(f1 == 0){
       if ((GetAsyncKeyState('Q') & 0x8000)&& 
          GetForegroundWindow() == hwnd) f1 = 1;
@@ -119,13 +123,13 @@ void game(){ // игра
    srand(time(0));
    char s[40]{0};
    Enemy norm[7] = {
-      {298, 205, 100, 100, 4, bmp_enemy[0]},//ZOMBIE 
-      {298, 205, 200, 200, 6, bmp_enemy[1]}, //KNIGHT
-      {298, 205, 50, 50, 8, bmp_enemy[2]}, //NINJA
-      {298, 205, 1000, 1000, 5, bmp_enemy[3]}, //BOSS1
-      {298, 205, 700, 700, 7, bmp_enemy[4]}, //BOSS2
-      {298, 205, 200, 200, 9, bmp_enemy[5]}, //BOSS3
-      {298, 205, 1000, 1000, 9, bmp_enemy[6]}}; //BOSS4
+      {298, 205, 100, 100, 4, bmp_enemy[ZOMBIE]},//ZOMBIE 
+      {298, 205, 200, 200, 6, bmp_enemy[KNIGHT]}, //KNIGHT
+      {298, 205, 50, 50, 8, bmp_enemy[NINJA]}, //NINJA
+      {298, 205, 1000, 1000, 5, bmp_enemy[BOSS1]}, //BOSS1
+      {298, 205, 700, 700, 7, bmp_enemy[BOSS2]}, //BOSS2
+      {298, 205, 200, 200, 9, bmp_enemy[BOSS3]}, //BOSS3
+      {298, 205, 1000, 1000, 9, bmp_enemy[BOSS4]}}; //BOSS4
    init_set_of_rooms(norm);
    Room Room;
    Hero Hero;
