@@ -38,7 +38,7 @@ class Hero {
       void SpearAttack(); // атака игрока
       void DrawHero(); // отрисовка игрока и его копья
       void DrawStats(); // отрисовка характеристик игрока
-      int HeroDoor(int f[5], int ID); // перемещение игрока между комнатами и взятие предмета
+      int HeroDoor(array<bool, 4> f, int ID, int type_room); // перемещение игрока между комнатами и взятие предмета
       void DrawItems(); // отрисовка иконок предметов игрока
 }; // класс игрока
 

@@ -87,8 +87,8 @@ int menu() // выбор пункта меню
    return 0;
 }
 
-void draw_end_game(int x)
-{ // отрисока финального экрана
+void draw_end_game(int x) // отрисока финального экрана
+{ 
    if(x < 0) putimage(0, 0, bmp_basic[18], COPY_PUT);
    else putimage(0, 0, bmp_basic[19], COPY_PUT);
    swapbuffers();

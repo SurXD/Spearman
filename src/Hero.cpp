@@ -1,29 +1,33 @@
 #include "Textures.h"
 #include"Hero.h"
 #include"Room.h"
+#include"audio/miniaudio_audio_manager.h"
+#include <array>
+
+extern audio_manager* audio;
 
 using namespace std;
 extern HWND hwnd;
 
-int Hero::HeroDoor(int f[5], int ID){ // перемещение игрока между комнатами и взятие предмета
-   if(f[0] == 10){
+int Hero::HeroDoor(array<bool, 4> f, int ID, int type_room){ // перемещение игрока между комнатами и взятие предмета
+   if(type_room == 3){
       if(298 > x - 31 && 298 < x + 31 && 155 < y + 72 && 155 > y - 72) return 10;
    }
    else{ 
-      if(f[1] == 1 && x > 296 && x < 356 && y > 337){
-         y = 10; return 1;
+      if(f[0] && x > 296 && x < 356 && y > 337){
+         y = 10; return 0;
       }
-      else if(f[2] == 1 && y > 163 && y < 200 && x > 567){
-         x = 67; return 2;
+      else if(f[1] && y > 163 && y < 200 && x > 567){
+         x = 67; return 1;
       }
-      else if(f[3] == 1 && x > 296 && x < 356 && y < 5){
-         y = 330; return 3; 
+      else if(f[2] && x > 296 && x < 356 && y < 5){
+         y = 330; return 2; 
       }
-      else if(f[4] == 1 && y > 163 && y < 200 && x < 60){
-         x = 560; return 4;
+      else if(f[3] && y > 163 && y < 200 && x < 60){
+         x = 560; return 3;
       }
    }
-   if(f[0] == 11){
+   if(ID && type_room == 2){
       if(315 > x - 31 && 315 < x + 31 && 213 < y + 72 && 213 > y - 72){
          if(ID == 1) HP += 2;
          if(ID == 2) Damage += 4;
@@ -34,7 +38,7 @@ int Hero::HeroDoor(int f[5], int ID){ // перемещение игрока между комнатами и вз
          return 11;
       }
    }
-   return 0;
+   return -1;
 }
 void Hero::DamageMe(Enemy arr[4], int num){ // проверка на нанесение урона игроку
    int f = 0;
@@ -51,7 +55,7 @@ void Hero::DamageMe(Enemy arr[4], int num){ // проверка на нанесение урона игрок
    if(frameNoDamage == 0 && f == 1){
       HP -= 1; 
       frameNoDamage = 1;
-      PlaySoundA("./Resources/Sound/Hit.wav", nullptr, SND_ASYNC);
+      audio->play_sound({ "./Resources/Sound/Hit.wav" });
    }
    if(frameNoDamage == 30) frameNoDamage = 0;
 }
@@ -98,26 +102,24 @@ void Hero::Move(){ // движение игрока
    }
 }
 void Hero::SpearAttack(){ // атака игрока
-   if(frameSpear == 0){
-
-       PlaySoundA("./Resources/Sound/SpearSwish.wav", nullptr, SND_ASYNC);
-
+   if(frameSpear == 0)
+   {
       if(GetForegroundWindow() != hwnd) return;
 
-      if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-         frameSpear = 1; directionSpear = 1;
-      }
-      if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
-         frameSpear = 1; directionSpear = 2;
-      }
-      if (GetAsyncKeyState(VK_UP) & 0x8000) {
-         frameSpear = 1; directionSpear = 3;
-      }
-      if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
-         frameSpear = 1; directionSpear = 4;
+      std::array<int, 4> keykodes{ VK_DOWN, VK_RIGHT, VK_UP, VK_LEFT };
+
+      for(int i = 0; i < keykodes.size(); i++)
+      {
+          if(GetAsyncKeyState(keykodes[i]) & 0x8000)
+          {
+              frameSpear = 1;
+              directionSpear = i + 1;
+              audio->play_sound({ "./Resources/Sound/SpearSwish.wav" });
+              break;
+          }
       }
    }
-   else if(frameSpear < 18) frameSpear += 3;
+   else if (frameSpear < 18) frameSpear += 3; 
    else frameSpear = 0;
 }
 void Hero::DrawHero(){ // отрисовка игрока и его копья
@@ -168,11 +170,10 @@ void Hero::DrawStats(){ // отрисовка характеристик игрока
 }
 
 void Hero::DrawItems(){ // отрисовка иконок предметов игрока
+   std::array<std::pair<int, int>, 4> item_coords{{ {656, 313}, {733, 313}, {656, 396}, {733, 396} }};
+
    for (int i = 0; i < nextItem; i++){
-      if(i == 0) putimage(656, 313, Items[0], TRANSPARENT_PUT);
-      if(i == 1) putimage(733, 313, Items[1], TRANSPARENT_PUT);
-      if(i == 2) putimage(656, 396, Items[2], TRANSPARENT_PUT);
-      if(i == 3) putimage(733, 396, Items[3], TRANSPARENT_PUT);
+      putimage(item_coords[i].first, item_coords[i].second, Items[i], TRANSPARENT_PUT);
    }
 }
 

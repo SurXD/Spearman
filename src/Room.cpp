@@ -10,7 +10,7 @@ void Room::OpenRoom() // проверка на открытие дверей в комнат
     }
 }
 void Room::Moved(int x, int y){ // движение врагов
-   for(int i = 0; i < current_enemy_count; i++)
+   for(int i = 0; i < current_enemy_count; ++i)
    {
       if(enemies[i].HP > 0)
       {
@@ -36,11 +36,12 @@ void Room::Moved(int x, int y){ // движение врагов
       }
    }
 }
-void Room::printEnemys(){ // отрисовка врагов
+void Room::printEnemys(/*Renderer* renderer*/) { // отрисовка врагов
    for(int i = 0; i < current_enemy_count; i++)
    {
       if(enemies[i].HP > 0)
       {
+          //renderer->draw(get_enemy_type(enemies[i]), enemies[i].x, enemies[i].y, enemies[i].bmp, TRANSPARENT_PUT);
          putimage(enemies[i].x, enemies[i].y, enemies[i].bmp, TRANSPARENT_PUT);
          setcolor(BLACK);
          rectangle(enemies[i].x-15, enemies[i].y-16, enemies[i].x+46, enemies[i].y-1);
@@ -60,8 +61,8 @@ void Room::initRoom(int x, set_of_rooms a){ // создание комнаты
    }
    else
    { 
-      int f = rand() % 3;//id комнаты этажа (кроме босса)
-      if(x == 3) f = 3;//если команта с боссом то f = 3
+      int f = rand() % 3; //id комнаты этажа (кроме босса)
+      if(x == 3) f = 3; //если команта с боссом то f = 3
       for(int i = 0; i < a.enemies_count[current_floor * 4 + f - 4]; i++)//проходимся по количеству врагов в комнате
       {
           enemies[i] = a.enemies_location[current_floor * 4 + f - 4][i];

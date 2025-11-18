@@ -76,8 +76,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./src;./Dependencies/WinBGIm/lib;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./src;./Dependencies/WinBGIm/lib;./src;./Dependencies/miniaudio;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,8 +94,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./src;./Dependencies/WinBGIm/lib;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./src;./Dependencies/WinBGIm/lib;./src;./Dependencies/miniaudio;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,6 +145,7 @@
     <ClCompile Include="Dependencies\WinBGIm\lib\text.cpp" />
     <ClCompile Include="Dependencies\WinBGIm\lib\winbgi.cpp" />
     <ClCompile Include="Dependencies\WinBGIm\lib\winthread.cpp" />
+    <ClCompile Include="src\audio\miniaudio_audio_manager.cpp" />
     <ClCompile Include="src\Hero.cpp" />
     <ClCompile Include="src\input\winapi_input_manager.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -157,6 +160,9 @@
     <ClInclude Include="Dependencies\WinBGIm\lib\keys_n_colors.h" />
     <ClInclude Include="Dependencies\WinBGIm\lib\winbgim.h" />
     <ClInclude Include="Dependencies\WinBGIm\lib\winbgitypes.h" />
+    <ClInclude Include="src\audio\audio_manager.h" />
+    <ClInclude Include="src\audio\miniaudio_audio_manager.h" />
+    <ClInclude Include="src\audio\sound.h" />
     <ClInclude Include="src\Hero.h" />
     <ClInclude Include="src\input\input_manager.h" />
     <ClInclude Include="src\input\input_types.h" />

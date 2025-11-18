@@ -2,18 +2,20 @@
 #include"Room.h"
 #include"Hero.h"
 #include"Stage.h"
+#include "audio/miniaudio_audio_manager.h"
 
 int current_floor = 1; // этаж
 set_of_rooms a; // пул комнат
 
 HWND hwnd;//текущее окно
+audio_manager* audio = new miniaudio_audio_manager;
 
 int SCREEN_WIDTH = 800;
 int SCREEN_HEIGHT = 480;
 int OFFSET_X = 100;
 int OFFSET_Y = 100;
-
-enum class state{ SCREENSAVER, MAIN_MENU, ABOUT_SCREEN, RULES_SCREEN, RUNNING, PAUSE, GAME_OVER };
+//if(input->is_pressed(key::W)) selected--; условно
+enum class state{ SCREENSAVER, MAIN_MENU, ABOUT_SCREEN, RULES_SCREEN, RUNNING, PAUSE, GAME_OVER };//сделать классы 
 
 void init(); // инициализация программы
 void draw_screensaver(); // заставка игры
@@ -22,7 +24,7 @@ void about(); // об игре
 void rules(); // управление и правила
 bool pause();
 
-int main()
+int main() 
 { // основная функция
    
    init();
@@ -121,7 +123,7 @@ void game(){ // игра
    int stagef;
    current_floor = 1;//почему то не было
    srand(time(0));
-   char s[40]{0};
+   //char s[40]{0}; а зачем оно тут было?
    Enemy norm[7] = {
       {298, 205, 100, 100, 4, bmp_enemy[ZOMBIE]},//ZOMBIE 
       {298, 205, 200, 200, 6, bmp_enemy[KNIGHT]}, //KNIGHT
@@ -140,12 +142,15 @@ void game(){ // игра
    {
       clearviewport();
       putimage(0, 0, bmp_basic[17], TRANSPARENT_PUT);
-      Stage.printDoorsAndItems(Room.get_open());
+      Stage.check_of_rooms();
+
+      Stage.printDoorsAndItems(Room.is_open());
       Hero.DrawStats();
       Hero.DrawHero();
       Hero.DrawItems();
       Room.printEnemys();
       Stage.printMap();
+
       if(pause())
       {
          std::string info = "Этаж: " + std::to_string(current_floor);
@@ -155,6 +160,7 @@ void game(){ // игра
          swapbuffers(); 
          continue; 
       }
+
       Hero.SpearAttack();
       Hero.Move();
       Room.Moved(Hero.get_x(), Hero.get_y());
@@ -164,8 +170,8 @@ void game(){ // игра
       Hero.Move();
       if(Hero.get_HP() < 1) current_floor = -10;
       Room.OpenRoom();
-      if(Room.get_open() == 1){
-         stagef = Stage.StageMove(Hero.HeroDoor(Stage.getF(), Stage.getItemID()));
+      if(Room.is_open()){
+         stagef = Stage.StageMove(Hero.HeroDoor(Stage.get_adj_rooms(), Stage.getItemID(), Stage.getRoom()));
          if(stagef > 0){
             if(stagef == 10){
                current_floor++;

@@ -39,7 +39,7 @@ class Room
       }
       ~Room(){delete[] enemies;}
       int get_num(){ return current_enemy_count; }
-      bool get_open(){ return door_open; }
+      bool is_open(){ return door_open; }
       Enemy* getArr(){ return enemies;} // получить массив врагов в комнате
       void initRoom(int x, set_of_rooms a); // создание комнаты
       void OpenRoom(); // проверка на открытие дверей в комнате
