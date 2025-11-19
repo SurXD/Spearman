@@ -3,3 +3,6 @@ Release/
 .vs/
 Spearman UCP/
 Spearman UCP.vcxproj.user
+out/
+CMakeSettings.json
+build/
