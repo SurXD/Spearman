@@ -1,7 +1,7 @@
 #include "Textures.h"
 #include"Hero.h"
 #include"Room.h"
-#include"audio/miniaudio_audio_manager.h"
+#include "audio/audio_manager.h"
 #include <array>
 
 extern audio_manager* audio;
@@ -14,16 +14,16 @@ int Hero::HeroDoor(array<bool, 4> f, int ID, int type_room){ // перемеще
       if(298 > x - 31 && 298 < x + 31 && 155 < y + 72 && 155 > y - 72) return 10;
    }
    else{ 
-      if(f[0] && x > 296 && x < 356 && y > 337){
+      if(f[0] && x > 296 && x < 356 && y > 337){//нижняя дверь
          y = 10; return 0;
       }
-      else if(f[1] && y > 163 && y < 200 && x > 567){
+      else if(f[1] && y > 163 && y < 200 && x > 567){//дверь справа
          x = 67; return 1;
       }
-      else if(f[2] && x > 296 && x < 356 && y < 5){
+      else if(f[2] && x > 296 && x < 356 && y < 5){//верхняя дверь
          y = 330; return 2; 
       }
-      else if(f[3] && y > 163 && y < 200 && x < 60){
+      else if(f[3] && y > 163 && y < 200 && x < 60){//дверь слева
          x = 560; return 3;
       }
    }
