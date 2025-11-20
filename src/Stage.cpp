@@ -1,7 +1,7 @@
 #include"Textures.h"
 #include "Stage.h"
 
-void Stage::initStage(){ // создание этажа
+void Stage::initStage(){ // СЃРѕР·РґР°РЅРёРµ СЌС‚Р°Р¶Р°
    ItemID = rand() % MAX_ITEM_COUNT + 1;
    for (auto& i : stage) i.fill(0); //stage.fill({});
    for (auto& i : stagemap) i.fill(0);
@@ -38,7 +38,7 @@ void Stage::initStage(){ // создание этажа
    stage[end_room_x][end_room_y] = END_ROOM;
 }
 
-void Stage::create_way(int x_current, int y_current, const int x_end, const int y_end) // прокладывает дорогу с обычными врагами от одной комнаты до другой
+void Stage::create_way(int x_current, int y_current, const int x_end, const int y_end) // РїСЂРѕРєР»Р°РґС‹РІР°РµС‚ РґРѕСЂРѕРіСѓ СЃ РѕР±С‹С‡РЅС‹РјРё РІСЂР°РіР°РјРё РѕС‚ РѕРґРЅРѕР№ РєРѕРјРЅР°С‚С‹ РґРѕ РґСЂСѓРіРѕР№
 {
     int step_x = x_end - x_current > 0 ? 1 : -1, 
         step_y = y_end - y_current > 0 ? 1 : -1;
@@ -59,7 +59,7 @@ void Stage::create_way(int x_current, int y_current, const int x_end, const int 
     }
 }
 
-void Stage::check_of_rooms() { // отмечает смежные комнаты
+void Stage::check_of_rooms() { // РѕС‚РјРµС‡Р°РµС‚ СЃРјРµР¶РЅС‹Рµ РєРѕРјРЅР°С‚С‹
     adjoining_rooms.fill(0);
     if (yj < MAX_STAGE_SIZE - 1) {
         if (stage[xi][yj + 1]) { adjoining_rooms[UP] = true; stagemap[xi][yj + 1] = stage[xi][yj + 1]; }
@@ -75,7 +75,7 @@ void Stage::check_of_rooms() { // отмечает смежные комнаты
     }
 }
 
-int Stage::StageMove(int direction) { // перемещение игрока по этажу и взятие предмета
+int Stage::StageMove(int direction) { // РїРµСЂРµРјРµС‰РµРЅРёРµ РёРіСЂРѕРєР° РїРѕ СЌС‚Р°Р¶Сѓ Рё РІР·СЏС‚РёРµ РїСЂРµРґРјРµС‚Р°
     if(direction >= UP && direction <= LEFT) {
         if (stage[xi][yj] != ITEM_ROOM) stage[xi][yj] = EMPTY_ROOM;
         if      (direction == UP)    return stage[xi][++yj];
@@ -88,7 +88,7 @@ int Stage::StageMove(int direction) { // перемещение игрока по этажу и взятие пр
     return -1;
 }
 
-void Stage::printMap() { // отрисовка мини-карты
+void Stage::printMap() { // РѕС‚СЂРёСЃРѕРІРєР° РјРёРЅРё-РєР°СЂС‚С‹
     for (int i = 0; i < MAX_STAGE_SIZE; ++i) {
         for (int j = 0; j < MAX_STAGE_SIZE; ++j) {
             if (stagemap[i][j] != 0) {
@@ -107,7 +107,7 @@ void Stage::printMap() { // отрисовка мини-карты
     setfillstyle(1, RGB(80, 80, 80)); bar(671 + 21 * xi, 24 + 14 * yj, 680 + 21 * xi, 19 + 14 * yj);
 }
 
-void Stage::printDoorsAndItems(bool doors){ // отрисовка дверей и предметов
+void Stage::printDoorsAndItems(bool doors){ // РѕС‚СЂРёСЃРѕРІРєР° РґРІРµСЂРµР№ Рё РїСЂРµРґРјРµС‚РѕРІ
    stagemap[xi][yj] = stage[xi][yj];
    if(stage[xi][yj] == END_ROOM){ 
       setfillstyle(1, BLACK); bar(313, 155, 342, 227); 

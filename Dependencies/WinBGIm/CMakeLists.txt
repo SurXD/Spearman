@@ -17,5 +17,6 @@ if(WIN32)
 		ole32 
 		comdlg32 
 		oleaut32
+		msimg32
 		)
 endif()

@@ -8,12 +8,12 @@ constexpr int MAX_ROOMS_COUNT = 16;
 
 struct Enemy
 {
-   int x, y; // координаты врага
-   int HP; // здоровье врага
-   double startHP; // начальное здоровье врага
-   int Speed; // скорость врага
-   IMAGE * bmp; // изображение врага
-}; // структура врага
+   int x, y; // РєРѕРѕСЂРґРёРЅР°С‚С‹ РІСЂР°РіР°
+   int HP; // Р·РґРѕСЂРѕРІСЊРµ РІСЂР°РіР°
+   double startHP; // РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РґРѕСЂРѕРІСЊРµ РІСЂР°РіР°
+   int Speed; // СЃРєРѕСЂРѕСЃС‚СЊ РІСЂР°РіР°
+   IMAGE * bmp; // РёР·РѕР±СЂР°Р¶РµРЅРёРµ РІСЂР°РіР°
+}; // СЃС‚СЂСѓРєС‚СѓСЂР° РІСЂР°РіР°
 
 enum { ZOMBIE = 0, KNIGHT, NINJA };
 enum { BOSS1 = 3, BOSS2, BOSS3, BOSS4 };
@@ -40,12 +40,12 @@ class Room
       ~Room(){delete[] enemies;}
       int get_num(){ return current_enemy_count; }
       bool is_open(){ return door_open; }
-      Enemy* getArr(){ return enemies;} // получить массив врагов в комнате
-      void initRoom(int x, set_of_rooms a); // создание комнаты
-      void OpenRoom(); // проверка на открытие дверей в комнате
-      void Moved(int x, int y); // движение врагов
-      void printEnemys(); // отрисовка врагов
+      Enemy* getArr(){ return enemies;} // РїРѕР»СѓС‡РёС‚СЊ РјР°СЃСЃРёРІ РІСЂР°РіРѕРІ РІ РєРѕРјРЅР°С‚Рµ
+      void initRoom(int x, set_of_rooms a); // СЃРѕР·РґР°РЅРёРµ РєРѕРјРЅР°С‚С‹
+      void OpenRoom(); // РїСЂРѕРІРµСЂРєР° РЅР° РѕС‚РєСЂС‹С‚РёРµ РґРІРµСЂРµР№ РІ РєРѕРјРЅР°С‚Рµ
+      void Moved(int x, int y); // РґРІРёР¶РµРЅРёРµ РІСЂР°РіРѕРІ
+      void printEnemys(); // РѕС‚СЂРёСЃРѕРІРєР° РІСЂР°РіРѕРІ
 };
 
 
-void init_set_of_rooms(Enemy normal[]);// инициализация пула комнат
+void init_set_of_rooms(Enemy normal[]);// РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСѓР»Р° РєРѕРјРЅР°С‚

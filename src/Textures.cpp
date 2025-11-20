@@ -4,16 +4,16 @@ extern HWND hwnd;
 
 button but[BUTTON_MENU_COUNT];
 
-IMAGE* about_screen; //Изображение "О программе"
-IMAGE* rules_screen; //Изображение "Правила"
-IMAGE* screensaver; //Изображение "Заставка"
-IMAGE* main_screen; //Изображение "Меню игры"
+IMAGE* about_screen; //РР·РѕР±СЂР°Р¶РµРЅРёРµ "Рћ РїСЂРѕРіСЂР°РјРјРµ"
+IMAGE* rules_screen; //РР·РѕР±СЂР°Р¶РµРЅРёРµ "РџСЂР°РІРёР»Р°"
+IMAGE* screensaver; //РР·РѕР±СЂР°Р¶РµРЅРёРµ "Р—Р°СЃС‚Р°РІРєР°"
+IMAGE* main_screen; //РР·РѕР±СЂР°Р¶РµРЅРёРµ "РњРµРЅСЋ РёРіСЂС‹"
 
-IMAGE* bmp_basic[ENVIROMENT_OBJECTS_COUNT]; // массив для различных базовых изображений 
-IMAGE* bmp_items[ITEMS_COUNT]; // массив для изображения предметов и иконок предметов
-IMAGE* bmp_enemy[ENEMY_TYPE_COUNT]; // массив для изображения врагов 
+IMAGE* bmp_basic[ENVIROMENT_OBJECTS_COUNT]; // РјР°СЃСЃРёРІ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… Р±Р°Р·РѕРІС‹С… РёР·РѕР±СЂР°Р¶РµРЅРёР№ 
+IMAGE* bmp_items[ITEMS_COUNT]; // РјР°СЃСЃРёРІ РґР»СЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РїСЂРµРґРјРµС‚РѕРІ Рё РёРєРѕРЅРѕРє РїСЂРµРґРјРµС‚РѕРІ
+IMAGE* bmp_enemy[ENEMY_TYPE_COUNT]; // РјР°СЃСЃРёРІ РґР»СЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РІСЂР°РіРѕРІ 
 
-void load_menu_sprites() // инициализация кнопок меню
+void load_menu_sprites() // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРЅРѕРїРѕРє РјРµРЅСЋ
 {
     screensaver = loadBMP("./Resources/Textures/Spearmanz.bmp");
     main_screen = loadBMP("./Resources/Textures/Spearman.bmp");
@@ -52,7 +52,7 @@ void load_enemy_sprites()
     }
 }
 
-void draw_menu() // отрисовка кнопок меню
+void draw_menu() // РѕС‚СЂРёСЃРѕРІРєР° РєРЅРѕРїРѕРє РјРµРЅСЋ
 {
    clearviewport();
 
@@ -64,10 +64,10 @@ void draw_menu() // отрисовка кнопок меню
    }
 }
 
-int menu() // выбор пункта меню
+int menu() // РІС‹Р±РѕСЂ РїСѓРЅРєС‚Р° РјРµРЅСЋ
 {
    int x = 0, y = 0;
-   draw_menu();//отрисовка в отдельном блоке
+   draw_menu();//РѕС‚СЂРёСЃРѕРІРєР° РІ РѕС‚РґРµР»СЊРЅРѕРј Р±Р»РѕРєРµ
    swapbuffers();
 
     while(mousebuttons() != 1)
@@ -87,12 +87,12 @@ int menu() // выбор пункта меню
    return 0;
 }
 
-void draw_end_game(int x) // отрисока финального экрана
+void draw_end_game(int x) // РѕС‚СЂРёСЃРѕРєР° С„РёРЅР°Р»СЊРЅРѕРіРѕ СЌРєСЂР°РЅР°
 { 
    if(x < 0) putimage(0, 0, bmp_basic[18], COPY_PUT);
    else putimage(0, 0, bmp_basic[19], COPY_PUT);
    swapbuffers();
-   //это должно быть в другой части программы
+   //СЌС‚Рѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РІ РґСЂСѓРіРѕР№ С‡Р°СЃС‚Рё РїСЂРѕРіСЂР°РјРјС‹
    bool clicked = false;
    while(!clicked)
    {

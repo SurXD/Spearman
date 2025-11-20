@@ -3,7 +3,7 @@
 #include "miniaudio.h"
 #include "audio_manager.h"
 
-class miniaudio_audio_manager : public audio_manager//тупое название
+class miniaudio_audio_manager : public audio_manager//С‚СѓРїРѕРµ РЅР°Р·РІР°РЅРёРµ
 {
 	ma_engine engine;
 public:

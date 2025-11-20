@@ -13,19 +13,19 @@ enum {UP, RIGHT, DOWN, LEFT};
 
 class Stage
 {
-      array<array<int, MAX_STAGE_SIZE>, MAX_STAGE_SIZE> stage; // структура этажа
-      array<array<int, MAX_STAGE_SIZE>, MAX_STAGE_SIZE> stagemap; // мини-карта этажа
-      array<bool, 4> adjoining_rooms; //массив существования соседних комнат
-      int xi, yj; // текущая комната
-      int ItemID; // ID предмета
-      void create_way(int x_current, int y_current, const int x_end, const int y_end); // прокладывает дорогу с обычными врагами от одной комнаты до другой
+      array<array<int, MAX_STAGE_SIZE>, MAX_STAGE_SIZE> stage; // СЃС‚СЂСѓРєС‚СѓСЂР° СЌС‚Р°Р¶Р°
+      array<array<int, MAX_STAGE_SIZE>, MAX_STAGE_SIZE> stagemap; // РјРёРЅРё-РєР°СЂС‚Р° СЌС‚Р°Р¶Р°
+      array<bool, 4> adjoining_rooms; //РјР°СЃСЃРёРІ СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ СЃРѕСЃРµРґРЅРёС… РєРѕРјРЅР°С‚
+      int xi, yj; // С‚РµРєСѓС‰Р°СЏ РєРѕРјРЅР°С‚Р°
+      int ItemID; // ID РїСЂРµРґРјРµС‚Р°
+      void create_way(int x_current, int y_current, const int x_end, const int y_end); // РїСЂРѕРєР»Р°РґС‹РІР°РµС‚ РґРѕСЂРѕРіСѓ СЃ РѕР±С‹С‡РЅС‹РјРё РІСЂР°РіР°РјРё РѕС‚ РѕРґРЅРѕР№ РєРѕРјРЅР°С‚С‹ РґРѕ РґСЂСѓРіРѕР№
    public:
-      int getRoom(){ return stage[xi][yj];} // получить тип комнаты
-      int getItemID() {return ItemID;} // получить ID предмета
-      array<bool, 4> get_adj_rooms() { return adjoining_rooms; } // получить массив смежных комнат
-      void printMap(); // отрисовка мини-карты
-      void initStage(); // создание этажа
-      void printDoorsAndItems(bool doors); // отрисовка дверей и предметов 
-      int StageMove(int direction); // перемещение игрока по этажу и взятие предмета
-      void check_of_rooms(); // отмечает смежные комнаты
-}; // класс для этажа
+      int getRoom(){ return stage[xi][yj];} // РїРѕР»СѓС‡РёС‚СЊ С‚РёРї РєРѕРјРЅР°С‚С‹
+      int getItemID() {return ItemID;} // РїРѕР»СѓС‡РёС‚СЊ ID РїСЂРµРґРјРµС‚Р°
+      array<bool, 4> get_adj_rooms() { return adjoining_rooms; } // РїРѕР»СѓС‡РёС‚СЊ РјР°СЃСЃРёРІ СЃРјРµР¶РЅС‹С… РєРѕРјРЅР°С‚
+      void printMap(); // РѕС‚СЂРёСЃРѕРІРєР° РјРёРЅРё-РєР°СЂС‚С‹
+      void initStage(); // СЃРѕР·РґР°РЅРёРµ СЌС‚Р°Р¶Р°
+      void printDoorsAndItems(bool doors); // РѕС‚СЂРёСЃРѕРІРєР° РґРІРµСЂРµР№ Рё РїСЂРµРґРјРµС‚РѕРІ 
+      int StageMove(int direction); // РїРµСЂРµРјРµС‰РµРЅРёРµ РёРіСЂРѕРєР° РїРѕ СЌС‚Р°Р¶Сѓ Рё РІР·СЏС‚РёРµ РїСЂРµРґРјРµС‚Р°
+      void check_of_rooms(); // РѕС‚РјРµС‡Р°РµС‚ СЃРјРµР¶РЅС‹Рµ РєРѕРјРЅР°С‚С‹
+}; // РєР»Р°СЃСЃ РґР»СЏ СЌС‚Р°Р¶Р°

@@ -4,28 +4,28 @@
 #include"Stage.h"
 #include "audio/miniaudio_audio_manager.h"
 
-int current_floor = 1; // этаж
-set_of_rooms a; // пул комнат
+int current_floor = 1; // СЌС‚Р°Р¶
+set_of_rooms a; // РїСѓР» РєРѕРјРЅР°С‚
 
-HWND hwnd;//текущее окно
+HWND hwnd;//С‚РµРєСѓС‰РµРµ РѕРєРЅРѕ
 audio_manager* audio = new miniaudio_audio_manager;
 
 int SCREEN_WIDTH = 800;
 int SCREEN_HEIGHT = 480;
 int OFFSET_X = 100;
 int OFFSET_Y = 100;
-//if(input->is_pressed(key::W)) selected--; условно
-enum class state{ SCREENSAVER, MAIN_MENU, ABOUT_SCREEN, RULES_SCREEN, RUNNING, PAUSE, GAME_OVER };//сделать классы 
+//if(input->is_pressed(key::W)) selected--; СѓСЃР»РѕРІРЅРѕ
+enum class state{ SCREENSAVER, MAIN_MENU, ABOUT_SCREEN, RULES_SCREEN, RUNNING, PAUSE, GAME_OVER };//СЃРґРµР»Р°С‚СЊ РєР»Р°СЃСЃС‹ 
 
-void init(); // инициализация программы
-void draw_screensaver(); // заставка игры
-void game(); // игра
-void about(); // об игре  
-void rules(); // управление и правила
+void init(); // РёРЅРёС†РёР°Р»РёР·Р°С†РёВ¤ РїСЂРѕРіСЂР°РјРјС‹
+void draw_screensaver(); // Р·Р°СЃС‚Р°РІРєР° РёРіСЂС‹
+void game(); // РёРіСЂР°
+void about(); // РѕР± РёРіСЂРµ  
+void rules(); // СѓРїСЂР°РІР»РµРЅРёРµ Рё РїСЂР°РІРёР»Р°
 bool pause();
 
 int main() 
-{ // основная функция
+{ // РѕСЃРЅРѕРІРЅР°В¤ С„СѓРЅРєС†РёВ¤
    
    init();
    draw_screensaver();
@@ -43,18 +43,18 @@ int main()
    return 0;
 }
 
-void init(){ // инициализация программы
+void init(){ // РёРЅРёС†РёР°Р»РёР·Р°С†РёВ¤ РїСЂРѕРіСЂР°РјРјС‹
    initwindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Spearman", OFFSET_X, OFFSET_Y);
-   load_menu_sprites(); // инициализация кнопок меню
+   load_menu_sprites(); // РёРЅРёС†РёР°Р»РёР·Р°С†РёВ¤ РєРЅРѕРїРѕРє РјРµРЅСЋ
    load_items_sprites();
    load_enemy_sprites();
 }
-void draw_screensaver(){ // заставка игры
+void draw_screensaver(){ // Р·Р°СЃС‚Р°РІРєР° РёРіСЂС‹
    putimage(0, 0, screensaver, COPY_PUT);
    getch();
 }
 
-void about() // об игре 
+void about() // РѕР± РёРіСЂРµ 
 {
    clearviewport();
    putimage(0, 0, about_screen, COPY_PUT);
@@ -67,7 +67,7 @@ void about() // об игре
    }
 }
 
-void rules(){ // управление
+void rules(){ // СѓРїСЂР°РІР»РµРЅРёРµ
    clearviewport();
    putimage(0, 0, rules_screen, COPY_PUT);
    swapbuffers();
@@ -81,22 +81,22 @@ void rules(){ // управление
 
 void init_set_of_rooms(Enemy normal[])
 {
-    //Враги 1 этажа
+    //В¬СЂР°РіРё 1 СЌС‚Р°Р¶Р°
     a.enemies_location[0][0] = normal[ZOMBIE];   a.enemies_location[0][1] = normal[ZOMBIE];   a.enemies_location[0][2] = normal[ZOMBIE];                                               a.enemies_count[0] = 3;
     a.enemies_location[1][0] = normal[ZOMBIE];   a.enemies_location[1][1] = normal[ZOMBIE];                                                                                            a.enemies_count[1] = 2;
     a.enemies_location[2][0] = normal[ZOMBIE];   a.enemies_location[2][1] = normal[KNIGHT];   a.enemies_location[2][2] = normal[ZOMBIE];                                               a.enemies_count[2] = 3;
     a.enemies_location[3][0] = normal[BOSS1];                                                                                                                                          a.enemies_count[3] = 1;
-    //Враги 2 этажа
+    //В¬СЂР°РіРё 2 СЌС‚Р°Р¶Р°
     a.enemies_location[4][0] = normal[KNIGHT];   a.enemies_location[4][1] = normal[KNIGHT];                                                                                            a.enemies_count[4] = 2;
     a.enemies_location[5][0] = normal[ZOMBIE];   a.enemies_location[5][1] = normal[KNIGHT];   a.enemies_location[5][2] = normal[KNIGHT];                                               a.enemies_count[5] = 3;
     a.enemies_location[6][0] = normal[NINJA];    a.enemies_location[6][1] = normal[KNIGHT];                                                                                            a.enemies_count[6] = 2;
     a.enemies_location[7][0] = normal[BOSS2];                                                                                                                                          a.enemies_count[7] = 1;
-    //Враги 3 этажа
+    //В¬СЂР°РіРё 3 СЌС‚Р°Р¶Р°
     a.enemies_location[8][0] = normal[ZOMBIE];   a.enemies_location[8][1] = normal[ZOMBIE];   a.enemies_location[8][2] = normal[ZOMBIE];  a.enemies_location[8][3] = normal[ZOMBIE];   a.enemies_count[8] = 4;
     a.enemies_location[9][0] = normal[NINJA];    a.enemies_location[9][1] = normal[NINJA];                                                                                             a.enemies_count[9] = 2;
     a.enemies_location[10][0] = normal[KNIGHT];  a.enemies_location[10][1] = normal[KNIGHT];  a.enemies_location[10][2] = normal[NINJA];                                               a.enemies_count[10] = 3;
     a.enemies_location[11][0] = normal[BOSS3];                                                                                                                                         a.enemies_count[11] = 1;
-    //Враги 4 этажа
+    //В¬СЂР°РіРё 4 СЌС‚Р°Р¶Р°
     a.enemies_location[12][0] = normal[KNIGHT];  a.enemies_location[12][1] = normal[KNIGHT];  a.enemies_location[12][2] = normal[KNIGHT]; a.enemies_location[12][3] = normal[KNIGHT];  a.enemies_count[12] = 4;
     a.enemies_location[13][0] = normal[KNIGHT];  a.enemies_location[13][1] = normal[NINJA];   a.enemies_location[13][2] = normal[NINJA];                                               a.enemies_count[13] = 3;
     a.enemies_location[14][0] = normal[ZOMBIE];  a.enemies_location[14][1] = normal[KNIGHT];  a.enemies_location[14][2] = normal[NINJA];                                               a.enemies_count[14] = 3;
@@ -119,11 +119,11 @@ void init_set_of_rooms(Enemy normal[])
     a.enemies_location[14][0].x = 258;  a.enemies_location[14][1].x = 338;
 }
 
-void game(){ // игра
+void game(){ // РёРіСЂР°
    int stagef;
-   current_floor = 1;//почему то не было
+   current_floor = 1;//РїРѕС‡РµРјСѓ С‚Рѕ РЅРµ Р±С‹Р»Рѕ
    srand(time(0));
-   //char s[40]{0}; а зачем оно тут было?
+   //char s[40]{0}; Р° Р·Р°С‡РµРј РѕРЅРѕ С‚СѓС‚ Р±С‹Р»Рѕ?
    Enemy norm[7] = {
       {298, 205, 100, 100, 4, bmp_enemy[ZOMBIE]},//ZOMBIE 
       {298, 205, 200, 200, 6, bmp_enemy[KNIGHT]}, //KNIGHT
@@ -153,9 +153,9 @@ void game(){ // игра
 
       if(pause())
       {
-         std::string info = "Этаж: " + std::to_string(current_floor);
+         std::string info = "РЃС‚Р°Р¶: " + std::to_string(current_floor);
          setcolor(RED);
-         outtextxy(700 / 2, 450 /2, "Пауза");
+         outtextxy(700 / 2, 450 /2, "С•Р°СѓР·Р°");
          outtextxy(700 / 2, 450 /2 + 30, info.c_str());
          swapbuffers(); 
          continue; 
@@ -183,7 +183,7 @@ void game(){ // игра
       swapbuffers();
    }
    draw_end_game(current_floor);
-   //здесь происходил segmentation fault;
+   //Р·РґРµСЃСЊ РїСЂРѕРёСЃС…РѕРґРёР» segmentation fault;
 }
 
 bool pause()

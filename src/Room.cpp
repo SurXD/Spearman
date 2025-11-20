@@ -1,7 +1,7 @@
 #include"Textures.h"
 #include "Room.h"
 
-void Room::OpenRoom() // проверка на открытие дверей в комнат
+void Room::OpenRoom() // РїСЂРѕРІРµСЂРєР° РЅР° РѕС‚РєСЂС‹С‚РёРµ РґРІРµСЂРµР№ РІ РєРѕРјРЅР°С‚
 {
     door_open = true;
     for(int i = 0; i < current_enemy_count; i++)
@@ -9,7 +9,7 @@ void Room::OpenRoom() // проверка на открытие дверей в комнат
         if(enemies[i].HP > 0) door_open = false;
     }
 }
-void Room::Moved(int x, int y){ // движение врагов
+void Room::Moved(int x, int y){ // РґРІРёР¶РµРЅРёРµ РІСЂР°РіРѕРІ
    for(int i = 0; i < current_enemy_count; ++i)
    {
       if(enemies[i].HP > 0)
@@ -36,7 +36,7 @@ void Room::Moved(int x, int y){ // движение врагов
       }
    }
 }
-void Room::printEnemys(/*Renderer* renderer*/) { // отрисовка врагов
+void Room::printEnemys(/*Renderer* renderer*/) { // РѕС‚СЂРёСЃРѕРІРєР° РІСЂР°РіРѕРІ
    for(int i = 0; i < current_enemy_count; i++)
    {
       if(enemies[i].HP > 0)
@@ -50,8 +50,8 @@ void Room::printEnemys(/*Renderer* renderer*/) { // отрисовка врагов
       }
    }
 }
-void Room::initRoom(int x, set_of_rooms a){ // создание комнаты
-   if(x == 4 || x == 2)//начальная комната и комната с предметом
+void Room::initRoom(int x, set_of_rooms a){ // СЃРѕР·РґР°РЅРёРµ РєРѕРјРЅР°С‚С‹
+   if(x == 4 || x == 2)//РЅР°С‡Р°Р»СЊРЅР°СЏ РєРѕРјРЅР°С‚Р° Рё РєРѕРјРЅР°С‚Р° СЃ РїСЂРµРґРјРµС‚РѕРј
    {
       current_enemy_count = 0; door_open = true;
       for(int i = 0; i < 4; i++)
@@ -61,9 +61,9 @@ void Room::initRoom(int x, set_of_rooms a){ // создание комнаты
    }
    else
    { 
-      int f = rand() % 3; //id комнаты этажа (кроме босса)
-      if(x == 3) f = 3; //если команта с боссом то f = 3
-      for(int i = 0; i < a.enemies_count[current_floor * 4 + f - 4]; i++)//проходимся по количеству врагов в комнате
+      int f = rand() % 3; //id РєРѕРјРЅР°С‚С‹ СЌС‚Р°Р¶Р° (РєСЂРѕРјРµ Р±РѕСЃСЃР°)
+      if(x == 3) f = 3; //РµСЃР»Рё РєРѕРјР°РЅС‚Р° СЃ Р±РѕСЃСЃРѕРј С‚Рѕ f = 3
+      for(int i = 0; i < a.enemies_count[current_floor * 4 + f - 4]; i++)//РїСЂРѕС…РѕРґРёРјСЃСЏ РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ РІСЂР°РіРѕРІ РІ РєРѕРјРЅР°С‚Рµ
       {
           enemies[i] = a.enemies_location[current_floor * 4 + f - 4][i];
           current_enemy_count = a.enemies_count[current_floor * 4 + f - 4];

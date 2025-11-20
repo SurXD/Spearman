@@ -10,23 +10,23 @@ constexpr int ITEMS_COUNT = 9;
 constexpr int ENVIROMENT_OBJECTS_COUNT = 20;
 constexpr int ENEMY_TYPE_COUNT = 7;
 
-extern IMAGE* about_screen; //Изображение "О программе"
-extern IMAGE* rules_screen; //Изображение "Правила"
-extern IMAGE* screensaver; //Изображение "Заставка"
-extern IMAGE* main_screen; //Изображение "Меню игры"
+extern IMAGE* about_screen; //РР·РѕР±СЂР°Р¶РµРЅРёРµ "Рћ РїСЂРѕРіСЂР°РјРјРµ"
+extern IMAGE* rules_screen; //РР·РѕР±СЂР°Р¶РµРЅРёРµ "РџСЂР°РІРёР»Р°"
+extern IMAGE* screensaver; //РР·РѕР±СЂР°Р¶РµРЅРёРµ "Р—Р°СЃС‚Р°РІРєР°"
+extern IMAGE* main_screen; //РР·РѕР±СЂР°Р¶РµРЅРёРµ "РњРµРЅСЋ РёРіСЂС‹"
 
-extern IMAGE* bmp_basic[ENVIROMENT_OBJECTS_COUNT]; // массив для различных базовых изображений 
-extern IMAGE* bmp_items[ITEMS_COUNT]; // массив для изображения предметов и иконок предметов
-extern IMAGE* bmp_enemy[ENEMY_TYPE_COUNT]; // массив для изображения врагов 
+extern IMAGE* bmp_basic[ENVIROMENT_OBJECTS_COUNT]; // РјР°СЃСЃРёРІ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… Р±Р°Р·РѕРІС‹С… РёР·РѕР±СЂР°Р¶РµРЅРёР№ 
+extern IMAGE* bmp_items[ITEMS_COUNT]; // РјР°СЃСЃРёРІ РґР»СЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РїСЂРµРґРјРµС‚РѕРІ Рё РёРєРѕРЅРѕРє РїСЂРµРґРјРµС‚РѕРІ
+extern IMAGE* bmp_enemy[ENEMY_TYPE_COUNT]; // РјР°СЃСЃРёРІ РґР»СЏ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РІСЂР°РіРѕРІ 
 
-struct button{ // кнопка
+struct button{ // РєРЅРѕРїРєР°
    int  x, y, dx, dy;
    IMAGE * bmp;
 };
-void draw_menu(); //отрисовка кнопок меню
-int menu(); // выбор пункта меню
-void load_menu_sprites(); // инициализация меню
+void draw_menu(); //РѕС‚СЂРёСЃРѕРІРєР° РєРЅРѕРїРѕРє РјРµРЅСЋ
+int menu(); // РІС‹Р±РѕСЂ РїСѓРЅРєС‚Р° РјРµРЅСЋ
+void load_menu_sprites(); // РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РјРµРЅСЋ
 void load_items_sprites();
 void load_enemy_sprites();
 
-void draw_end_game(int x); // отрисока финального экрана
+void draw_end_game(int x); // РѕС‚СЂРёСЃРѕРєР° С„РёРЅР°Р»СЊРЅРѕРіРѕ СЌРєСЂР°РЅР°

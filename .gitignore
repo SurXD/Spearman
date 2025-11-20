@@ -6,3 +6,4 @@ Spearman UCP.vcxproj.user
 out/
 CMakeSettings.json
 build/
+CMakeLists.txt.user

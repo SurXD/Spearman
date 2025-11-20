@@ -9,7 +9,7 @@ extern audio_manager* audio;
 using namespace std;
 extern HWND hwnd;
 
-int Hero::HeroDoor(array<bool, 4> f, int ID, int type_room){ // перемещение игрока между комнатами и взятие предмета
+int Hero::HeroDoor(array<bool, 4> f, int ID, int type_room){ // РїРµСЂРµРјРµС‰РµРЅРёРµ РёРіСЂРѕРєР° РјРµР¶РґСѓ РєРѕРјРЅР°С‚Р°РјРё Рё РІР·СЏС‚РёРµ РїСЂРµРґРјРµС‚Р°
    if(type_room == 3){
       if(298 > x - 31 && 298 < x + 31 && 155 < y + 72 && 155 > y - 72) return 10;
    }
@@ -40,7 +40,7 @@ int Hero::HeroDoor(array<bool, 4> f, int ID, int type_room){ // перемещение игро
    }
    return -1;
 }
-void Hero::DamageMe(Enemy arr[4], int num){ // проверка на нанесение урона игроку
+void Hero::DamageMe(Enemy arr[4], int num){ // РїСЂРѕРІРµСЂРєР° РЅР° РЅР°РЅРµСЃРµРЅРёРµ СѓСЂРѕРЅР° РёРіСЂРѕРєСѓ
    int f = 0;
    for(int i = 0; i < num; i++){
       if(arr[i].HP > 0){
@@ -59,7 +59,7 @@ void Hero::DamageMe(Enemy arr[4], int num){ // проверка на нанесение урона игрок
    }
    if(frameNoDamage == 30) frameNoDamage = 0;
 }
-void Hero::DamageEnemy(Enemy arr[4]){ // проверка на нанесение урона врагам
+void Hero::DamageEnemy(Enemy arr[4]){ // РїСЂРѕРІРµСЂРєР° РЅР° РЅР°РЅРµСЃРµРЅРёРµ СѓСЂРѕРЅР° РІСЂР°РіР°Рј
    if(frameSpear == 19){
       int xa, ya;
       if(directionSpear == 1){ 
@@ -85,7 +85,7 @@ void Hero::DamageEnemy(Enemy arr[4]){ // проверка на нанесение урона врагам
       }
    }
 }
-void Hero::Move(){ // движение игрока
+void Hero::Move(){ // РґРІРёР¶РµРЅРёРµ РёРіСЂРѕРєР°
    if(GetForegroundWindow() != hwnd) return;
    
    if (GetAsyncKeyState('W') & 0x8000) {
@@ -101,7 +101,7 @@ void Hero::Move(){ // движение игрока
       x = min(570, x + Speed/2);
    }
 }
-void Hero::SpearAttack(){ // атака игрока
+void Hero::SpearAttack(){ // Р°С‚Р°РєР° РёРіСЂРѕРєР°
    if(frameSpear == 0)
    {
       if(GetForegroundWindow() != hwnd) return;
@@ -122,7 +122,7 @@ void Hero::SpearAttack(){ // атака игрока
    else if (frameSpear < 18) frameSpear += 3; 
    else frameSpear = 0;
 }
-void Hero::DrawHero(){ // отрисовка игрока и его копья
+void Hero::DrawHero(){ // РѕС‚СЂРёСЃРѕРІРєР° РёРіСЂРѕРєР° Рё РµРіРѕ РєРѕРїСЊСЏ
    setcolor(RED);
    for(int i = 0; i < 3; i++){
       if(directionSpear == 3){
@@ -161,7 +161,7 @@ void Hero::DrawHero(){ // отрисовка игрока и его копья
       }
    }
 }
-void Hero::DrawStats(){ // отрисовка характеристик игрока
+void Hero::DrawStats(){ // РѕС‚СЂРёСЃРѕРІРєР° С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє РёРіСЂРѕРєР°
    settextstyle(GOTHIC_FONT, HORIZ_DIR, 1);   
    setcolor(BLACK);
    setbkcolor(WHITE);
@@ -169,7 +169,7 @@ void Hero::DrawStats(){ // отрисовка характеристик игрока
    setbkcolor(BLACK);
 }
 
-void Hero::DrawItems(){ // отрисовка иконок предметов игрока
+void Hero::DrawItems(){ // РѕС‚СЂРёСЃРѕРІРєР° РёРєРѕРЅРѕРє РїСЂРµРґРјРµС‚РѕРІ РёРіСЂРѕРєР°
    std::array<std::pair<int, int>, 4> item_coords{{ {656, 313}, {733, 313}, {656, 396}, {733, 396} }};
 
    for (int i = 0; i < nextItem; i++){
@@ -177,6 +177,6 @@ void Hero::DrawItems(){ // отрисовка иконок предметов игрока
    }
 }
 
-void DrawStat(int x, int y, int stat){ // отрисовка одной характеристики
+void DrawStat(int x, int y, int stat){ // РѕС‚СЂРёСЃРѕРІРєР° РѕРґРЅРѕР№ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё
    outtextxy(x, y, to_string(stat).c_str());
 }
