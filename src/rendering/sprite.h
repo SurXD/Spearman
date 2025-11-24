@@ -1,14 +1,15 @@
 #pragma once
 #include <string>
+#include <glm/glm.hpp>
 
 class sprite
 {
 protected:
-    int width, height;
+    //{width; height}
+    glm::ivec2 size;
 public:
-    sprite() : width(0), height(0) { }
+    sprite() : size{0, 0} { }
     virtual void init(const std::string& filename) = 0;
-    int get_width() const { return width; }
-    int get_height() const { return height; }
+    glm::ivec2 get_size() const { return size; }
     virtual ~sprite(){ }
 };

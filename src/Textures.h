@@ -1,4 +1,5 @@
 #pragma once
+#include "resource_manager/resource_manager.h"
 #include <iostream>
 #include <cmath>
 #include <graphics.h>
@@ -14,6 +15,7 @@ extern IMAGE* about_screen; //Изображение "О программе"
 extern IMAGE* rules_screen; //Изображение "Правила"
 extern IMAGE* screensaver; //Изображение "Заставка"
 extern IMAGE* main_screen; //Изображение "Меню игры"
+extern resource_manager* res;
 
 extern IMAGE* bmp_basic[ENVIROMENT_OBJECTS_COUNT]; // массив для различных базовых изображений 
 extern IMAGE* bmp_items[ITEMS_COUNT]; // массив для изображения предметов и иконок предметов

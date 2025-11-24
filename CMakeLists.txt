@@ -12,6 +12,9 @@ add_subdirectory(Dependencies/WinBGIm)
 add_library(miniaudio INTERFACE)
 target_include_directories(miniaudio INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/miniaudio)
 
+add_library(glm INTERFACE)
+target_include_directories(glm INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/GLM)
+
 file(GLOB_RECURSE SOURCE_FILES 
     "src/*.cpp"
     "src/*.h"
@@ -19,7 +22,7 @@ file(GLOB_RECURSE SOURCE_FILES
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE WinBGIm miniaudio)
+target_link_libraries(${PROJECT_NAME} PRIVATE WinBGIm miniaudio glm)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E copy_directory

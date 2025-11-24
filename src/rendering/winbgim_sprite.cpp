@@ -9,6 +9,6 @@ void winbgim_sprite::init(const std::string& filename)
         throw std::runtime_error("failed to open " + filename);
     }
 
-    width = imagewidth(data);
-    height = imageheight(data);
+    size.x = imagewidth(data);
+    size.y = imageheight(data);
 }

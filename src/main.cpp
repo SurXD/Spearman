@@ -32,7 +32,7 @@ bool pause();
 
 int main() 
 { // основна¤ функци¤
-   
+
    init();
    draw_screensaver();
    hwnd = FindWindow(nullptr, "Spearman");
@@ -159,9 +159,9 @@ void game(){ // игра
 
       if(pause())
       {
-         std::string info = "Ётаж: " + std::to_string(current_floor);
+         std::string info = "Этаж: " + std::to_string(current_floor);
          setcolor(RED);
-         outtextxy(700 / 2, 450 /2, "ѕауза");
+         outtextxy(700 / 2, 450 /2, "пауза");
          outtextxy(700 / 2, 450 /2 + 30, info.c_str());
          swapbuffers(); 
          continue; 
