@@ -1,4 +1,5 @@
 #pragma once
+#include<vector>
 #include"Textures.h"
 
 extern int current_floor;
@@ -47,5 +48,11 @@ class Room
       void printEnemys(); // отрисовка врагов
 };
 
+class room
+{
+    bool cleared;
+    std::vector<Enemy> enemies;
+public:
+};
 
 void init_set_of_rooms(Enemy normal[]);// инициализация пула комнат

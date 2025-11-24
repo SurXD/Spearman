@@ -3,12 +3,18 @@
 #include"Hero.h"
 #include"Stage.h"
 #include "audio/miniaudio_audio_manager.h"
+#include "input/winapi_input_manager.h"
+#include "resource_manager/resource_manager.h"
 
 int current_floor = 1; // этаж
 set_of_rooms a; // пул комнат
 
 HWND hwnd;//текущее окно
+
 audio_manager* audio = new miniaudio_audio_manager;
+input_manager* input = new winapi_input_manager;
+resource_manager* res = new resource_manager(rendering_type::WINBGIM);
+
 
 int SCREEN_WIDTH = 800;
 int SCREEN_HEIGHT = 480;
