@@ -1,5 +1,7 @@
 #pragma once
 #include "resource_manager/resource_manager.h"
+#include "input/winapi_input_manager.h"
+#include "state.h"
 #include <iostream>
 #include <cmath>
 #include <graphics.h>
@@ -16,6 +18,9 @@ extern IMAGE* rules_screen; //Изображение "Правила"
 extern IMAGE* screensaver; //Изображение "Заставка"
 extern IMAGE* main_screen; //Изображение "Меню игры"
 extern resource_manager* res;
+extern input_manager* input;
+
+extern state game_state;
 
 extern IMAGE* bmp_basic[ENVIROMENT_OBJECTS_COUNT]; // массив для различных базовых изображений 
 extern IMAGE* bmp_items[ITEMS_COUNT]; // массив для изображения предметов и иконок предметов
@@ -26,9 +31,12 @@ struct button{ // кнопка
    IMAGE * bmp;
 };
 void draw_menu(); //отрисовка кнопок меню
-int menu(); // выбор пункта меню
+void menu(); // выбор пункта меню
 void load_menu_sprites(); // инициализация меню
 void load_items_sprites();
 void load_enemy_sprites();
 
-void draw_end_game(int x); // отрисока финального экрана
+void draw_game_over();
+void game_over();
+void win();
+void draw_win();

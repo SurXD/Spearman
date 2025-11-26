@@ -54,8 +54,6 @@ void load_enemy_sprites()
 
 void draw_menu() // отрисовка кнопок меню
 {
-   clearviewport();
-
    putimage(0, 0, main_screen, COPY_PUT);
 
    for(int i = 0; i < BUTTON_MENU_COUNT; i++)
@@ -64,16 +62,14 @@ void draw_menu() // отрисовка кнопок меню
    }
 }
 
-int menu() // выбор пункта меню
+void menu() // выбор пункта меню
 {
    int x = 0, y = 0;
-   draw_menu();//отрисовка в отдельном блоке
-   swapbuffers();
 
-    while(mousebuttons() != 1)
+    if(mousebuttons() == 1)
     {
         x = mousex();
-        y = mousey();  
+        y = mousey();
     }
 
     for (int i = 0; i < BUTTON_MENU_COUNT; ++i) 
@@ -81,22 +77,27 @@ int menu() // выбор пункта меню
         if (x >= but[i].x && x <= but[i].x + but[i].dx &&
             y >= but[i].y && y <= but[i].y + but[i].dy)
         {
-            return i + 1;
+            game_state = static_cast<state>(i + 2);//плохое смещение
         }
     }
-   return 0;
 }
 
-void draw_end_game(int x) // отрисока финального экрана
-{ 
-   if(x < 0) putimage(0, 0, bmp_basic[18], COPY_PUT);
-   else putimage(0, 0, bmp_basic[19], COPY_PUT);
-   swapbuffers();
-   //это должно быть в другой части программы
-   bool clicked = false;
-   while(!clicked)
-   {
-       int c = getch();
-       if(c == 'Q' || c == 'q') clicked = true;
-   }
+void game_over()
+{
+    if(input->is_pressed(key::Q)) game_state = state::MAIN_MENU;
+}
+
+void win()
+{
+    if(input->is_pressed(key::Q)) game_state = state::MAIN_MENU;
+}
+
+void draw_game_over()
+{
+    putimage(0, 0, bmp_basic[18], COPY_PUT);
+}
+
+void draw_win()
+{
+    putimage(0, 0, bmp_basic[19], COPY_PUT);
 }

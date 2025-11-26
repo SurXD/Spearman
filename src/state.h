@@ -1,0 +1,3 @@
+#pragma once
+
+enum state{ SCREENSAVER, MAIN_MENU, RUNNING, ABOUT_SCREEN, RULES_SCREEN, EXIT, PAUSE, GAME_OVER, WIN };//сделать классы

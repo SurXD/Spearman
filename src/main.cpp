@@ -5,6 +5,9 @@
 #include "audio/miniaudio_audio_manager.h"
 #include "input/winapi_input_manager.h"
 #include "resource_manager/resource_manager.h"
+#include "window/winbgim_window.h"
+#include "rendering/winbgim_renderer.h"
+#include "state.h"
 
 int current_floor = 1; // этаж
 set_of_rooms a; // пул комнат
@@ -14,75 +17,181 @@ HWND hwnd;//текущее окно
 audio_manager* audio = new miniaudio_audio_manager;
 input_manager* input = new winapi_input_manager;
 resource_manager* res = new resource_manager(rendering_type::WINBGIM);
-
+renderer* r = new winbgim_renderer;
+window* w = new winbgim_window;
 
 int SCREEN_WIDTH = 800;
 int SCREEN_HEIGHT = 480;
 int OFFSET_X = 100;
 int OFFSET_Y = 100;
 //if(input->is_pressed(key::W)) selected--; условно
-enum class state{ SCREENSAVER, MAIN_MENU, ABOUT_SCREEN, RULES_SCREEN, RUNNING, PAUSE, GAME_OVER };//сделать классы 
+state  game_state;
 
+void logic();
+void draw();
 void init(); // инициализаци¤ программы
 void draw_screensaver(); // заставка игры
 void game(); // игра
 void about(); // об игре  
 void rules(); // управление и правила
-bool pause();
+void draw_rules_screen();
+void pause();
+void screensaver_logic();
+void draw_pause();
+void draw_about_screen();
+
+void logic()
+{
+    if(game_state == state::SCREENSAVER)
+    {
+        screensaver_logic();
+    }
+    if(game_state == state::MAIN_MENU)
+    {
+        menu();
+    }
+    if(game_state == state::ABOUT_SCREEN)
+    {
+        about();
+    }
+    if(game_state == state::RULES_SCREEN)
+    {
+        rules();
+    }
+    if(game_state == state::RUNNING)
+    {
+        game();
+    }
+    if(game_state == state::PAUSE)
+    {
+        pause();
+    }
+    if(game_state == state::GAME_OVER)
+    {
+        game_over();
+    }
+    if(game_state == state::WIN)
+    {
+        win();
+    }
+}
+
+void draw()
+{
+    if(game_state == state::SCREENSAVER)
+    {
+        draw_screensaver();
+    }
+    if(game_state == state::MAIN_MENU)
+    {
+        draw_menu();
+    }
+    if(game_state == state::ABOUT_SCREEN)
+    {
+        draw_about_screen();
+    }
+    if(game_state == state::RULES_SCREEN)
+    {
+        draw_rules_screen();
+    }
+    if(game_state == state::RUNNING)
+    {
+        draw();
+    }
+    if(game_state == state::PAUSE)
+    {
+        draw_pause();
+    }
+    if(game_state == state::GAME_OVER)
+    {
+        draw_game_over();
+    }
+    if(game_state == state::WIN)
+    {
+        draw_win();
+    }
+}
 
 int main() 
 { // основна¤ функци¤
-
    init();
-   draw_screensaver();
    hwnd = FindWindow(nullptr, "Spearman");
 
    int st = 0;
 
-   do
+   while(game_state != state::EXIT)
+   {
+       w->clear();
+       input->pull_events();
+
+       logic();
+       draw();
+
+       w->swap_buffers();
+   }
+
+   /*do
    {
       st = menu();
       if(st == 1) game(); 
       else if(st == 2) about(); 
       else if(st == 3) rules();     
-   } while(st != 4);
+   } while(st != 4);*/
    return 0;
 }
 
 void init(){ // инициализаци¤ программы
-   initwindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Spearman", OFFSET_X, OFFSET_Y);
+    game_state = state::SCREENSAVER;
+    w->create({SCREEN_WIDTH, SCREEN_HEIGHT}, "Spearman");
+   //initwindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Spearman", OFFSET_X, OFFSET_Y, true);
    load_menu_sprites(); // инициализаци¤ кнопок меню
    load_items_sprites();
    load_enemy_sprites();
 }
 void draw_screensaver(){ // заставка игры
    putimage(0, 0, screensaver, COPY_PUT);
-   getch();
+}
+
+void screensaver_logic()
+{
+    for(size_t i = 0; i < KEYS_COUNT; i++)
+    {
+        key k = static_cast<key>(i);
+        if(input->is_pressed(k)) game_state = state::MAIN_MENU;
+    }
 }
 
 void about() // об игре 
 {
-   clearviewport();
-   putimage(0, 0, about_screen, COPY_PUT);
-   swapbuffers();
-
-   int f1 = 0;
-   while(f1 == 0){
-      if ((GetAsyncKeyState('Q') & 0x8000 )&& 
-         GetForegroundWindow() == hwnd) f1 = 1;
-   }
+    if(input->is_pressed(key::Q)) game_state = state::MAIN_MENU;
 }
 
-void rules(){ // управление
-   clearviewport();
-   putimage(0, 0, rules_screen, COPY_PUT);
-   swapbuffers();
-   int f1 = 0;
-   //if(input->is_pressed(key::Q)) state = MAIN_MENU
-   while(f1 == 0){
-      if ((GetAsyncKeyState('Q') & 0x8000)&& 
-         GetForegroundWindow() == hwnd) f1 = 1;
-   }
+void draw_about_screen()
+{
+    putimage(0, 0, about_screen, COPY_PUT);
+}
+
+void rules()
+{ // управление
+   if(input->is_pressed(key::Q)) game_state = state::MAIN_MENU;
+}
+
+void draw_rules_screen()
+{
+    putimage(0, 0, rules_screen, COPY_PUT);
+}
+
+void draw_pause()
+{
+    std::string info = "Этаж: " + std::to_string(current_floor);
+    setcolor(RED);
+    outtextxy(700 / 2, 450 /2, "пауза");
+    outtextxy(700 / 2, 450 /2 + 30, info.c_str());
+}
+
+void pause()
+{
+    if(input->is_pressed(key::P)) game_state = state::RUNNING;
 }
 
 void init_set_of_rooms(Enemy normal[])
@@ -157,16 +266,6 @@ void game(){ // игра
       Room.printEnemys();
       Stage.printMap();
 
-      if(pause())
-      {
-         std::string info = "Этаж: " + std::to_string(current_floor);
-         setcolor(RED);
-         outtextxy(700 / 2, 450 /2, "пауза");
-         outtextxy(700 / 2, 450 /2 + 30, info.c_str());
-         swapbuffers(); 
-         continue; 
-      }
-
       Hero.SpearAttack();
       Hero.Move();
       Room.Moved(Hero.get_x(), Hero.get_y());
@@ -188,22 +287,9 @@ void game(){ // игра
       }
       swapbuffers();
    }
-   draw_end_game(current_floor);
+   if(current_floor == -10) game_state = state::GAME_OVER;
+   else game_state = state::WIN;
+   //draw_end_game(current_floor);
    //здесь происходил segmentation fault;
 }
 
-bool pause()
-{
-   static bool flag = false;
-   static bool key_pressed = false;
-   if(GetForegroundWindow() == hwnd && (GetAsyncKeyState('P') & 0x8000))
-   {
-      if(!key_pressed)
-      {
-         key_pressed = true;
-         flag = flag == false ? true : false;
-      }
-   }
-   else key_pressed = false;
-   return flag;
-}
