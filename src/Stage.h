@@ -1,6 +1,8 @@
 #pragma once
 #include <array>
 
+using namespace std;
+
 constexpr int MAX_ITEM_COUNT = 4;
 constexpr int MAX_STAGE_SIZE = 6;
 

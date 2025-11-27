@@ -1,4 +1,7 @@
 #include"Textures.h"
+#include "game.h"
+
+extern game* g;
 
 extern HWND hwnd;
 
@@ -78,6 +81,7 @@ void menu() // выбор пункта меню
             y >= but[i].y && y <= but[i].y + but[i].dy)
         {
             game_state = static_cast<state>(i + 2);//плохое смещение
+            if (static_cast<state>(i + 2) == state::RUNNING) g->start();
         }
     }
 }

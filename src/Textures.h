@@ -1,10 +1,10 @@
 #pragma once
+#include <graphics.h>
 #include "resource_manager/resource_manager.h"
 #include "input/winapi_input_manager.h"
 #include "state.h"
 #include <iostream>
 #include <cmath>
-#include <graphics.h>
 
 using namespace std;
 

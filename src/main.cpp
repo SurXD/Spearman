@@ -8,6 +8,7 @@
 #include "window/winbgim_window.h"
 #include "rendering/winbgim_renderer.h"
 #include "state.h"
+#include "game.h"
 
 int current_floor = 1; // этаж
 set_of_rooms a; // пул комнат
@@ -26,12 +27,13 @@ int OFFSET_X = 100;
 int OFFSET_Y = 100;
 //if(input->is_pressed(key::W)) selected--; условно
 state  game_state;
+game* g;
 
 void logic();
 void draw();
 void init(); // инициализаци¤ программы
 void draw_screensaver(); // заставка игры
-void game(); // игра
+//void game(); // игра
 void about(); // об игре  
 void rules(); // управление и правила
 void draw_rules_screen();
@@ -60,7 +62,7 @@ void logic()
     }
     if(game_state == state::RUNNING)
     {
-        game();
+        g->logic();
     }
     if(game_state == state::PAUSE)
     {
@@ -96,7 +98,7 @@ void draw()
     }
     if(game_state == state::RUNNING)
     {
-        draw();
+        g->draw();
     }
     if(game_state == state::PAUSE)
     {
@@ -117,6 +119,7 @@ int main()
    init();
    hwnd = FindWindow(nullptr, "Spearman");
 
+   g = new game;
    int st = 0;
 
    while(game_state != state::EXIT)
@@ -194,7 +197,7 @@ void pause()
     if(input->is_pressed(key::P)) game_state = state::RUNNING;
 }
 
-void init_set_of_rooms(Enemy normal[])
+/*void init_set_of_rooms(Enemy normal[])
 {
     //¬раги 1 этажа
     a.enemies_location[0][0] = normal[ZOMBIE];   a.enemies_location[0][1] = normal[ZOMBIE];   a.enemies_location[0][2] = normal[ZOMBIE];                                               a.enemies_count[0] = 3;
@@ -232,9 +235,9 @@ void init_set_of_rooms(Enemy normal[])
     a.enemies_location[12][0].x = 570;  a.enemies_location[12][0].y = 0;    a.enemies_location[12][1].x = 57;  a.enemies_location[12][1].y = 340;  a.enemies_location[12][2].x = 570;  a.enemies_location[12][2].y = 340;  a.enemies_location[12][3].x = 57;  a.enemies_location[12][3].y = 0;
     a.enemies_location[13][0].x = 258;  a.enemies_location[13][1].x = 338;
     a.enemies_location[14][0].x = 258;  a.enemies_location[14][1].x = 338;
-}
+}*/
 
-void game(){ // игра
+/*void game() { // игра
    int stagef;
    current_floor = 1;//почему то не было
    srand(time(0));
@@ -291,5 +294,5 @@ void game(){ // игра
    else game_state = state::WIN;
    //draw_end_game(current_floor);
    //здесь происходил segmentation fault;
-}
+}*/
 
