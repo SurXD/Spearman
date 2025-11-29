@@ -10,8 +10,8 @@
 #include "state.h"
 #include "game.h"
 
-int current_floor = 1; // этаж
-set_of_rooms a; // пул комнат
+//int current_floor = 1; // этаж
+//set_of_rooms a; // пул комнат
 
 HWND hwnd;//текущее окно
 
@@ -130,6 +130,8 @@ int main()
        logic();
        draw();
 
+        delay(41);
+
        w->swap_buffers();
    }
 
@@ -186,10 +188,10 @@ void draw_rules_screen()
 
 void draw_pause()
 {
-    std::string info = "Этаж: " + std::to_string(current_floor);
+    //std::string info = "Этаж: " + std::to_string(current_floor);
     setcolor(RED);
     outtextxy(700 / 2, 450 /2, "пауза");
-    outtextxy(700 / 2, 450 /2 + 30, info.c_str());
+    //outtextxy(700 / 2, 450 /2 + 30, info.c_str());
 }
 
 void pause()

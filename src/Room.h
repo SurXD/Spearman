@@ -42,7 +42,7 @@ class Room
       int get_num(){ return current_enemy_count; }
       bool is_open(){ return door_open; }
       Enemy* getArr(){ return enemies;} // получить массив врагов в комнате
-      void initRoom(int x, set_of_rooms a); // создание комнаты
+      void initRoom(int x, set_of_rooms a, int current_floor); // создание комнаты
       void OpenRoom(); // проверка на открытие дверей в комнате
       void Moved(int x, int y); // движение врагов
       void printEnemys(); // отрисовка врагов
@@ -55,4 +55,4 @@ class room
 public:
 };
 
-void init_set_of_rooms(Enemy normal[]);// инициализация пула комнат
+//void init_set_of_rooms(Enemy normal[]);// инициализация пула комнат

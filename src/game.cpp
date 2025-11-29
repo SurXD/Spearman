@@ -8,19 +8,20 @@ void game::start()
     delete Stage;
     delete Hero;
 
+    srand(time(0));
+    init_set_of_rooms(norm);
+    current_floor = 1;
+
     Room = new ::Room;
     Stage = new ::Stage;
     Hero = new ::Hero;
 
-    current_floor = 1;
-    init_set_of_rooms(norm);
     Stage->initStage();
-    Room->initRoom(4, a);
+    Room->initRoom(4, a, current_floor);
 }
 
 void game::logic()
 {
-    int stagef;
     Stage->check_of_rooms();
 
     Hero->SpearAttack();
@@ -28,7 +29,6 @@ void game::logic()
     Room->Moved(Hero->get_x(), Hero->get_y());
     Hero->DamageEnemy(Room->getArr());
     Hero->DamageMe(Room->getArr(), Room->get_num());
-    delay(41);
     Hero->Move();
     if(Hero->get_HP() < 1) current_floor = -10;
     Room->OpenRoom();
@@ -39,7 +39,7 @@ void game::logic()
                 current_floor++;
                 Stage->initStage();
             }
-            if(current_floor < 5){ Room->initRoom(Stage->getRoom(), a); }
+            if(current_floor < 5){ Room->initRoom(Stage->getRoom(), a, current_floor); }
         }
     }
 

@@ -8,6 +8,7 @@ using namespace std;
 
 class game
 {
+    int stagef{};
     int current_floor = 1; // этаж
     set_of_rooms a; // пул комнат
     Enemy norm[7] = {

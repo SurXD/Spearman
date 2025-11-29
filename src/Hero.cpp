@@ -2,12 +2,13 @@
 #include"Hero.h"
 #include"Room.h"
 #include "audio/audio_manager.h"
+#include "input/input_manager.h"
 #include <array>
 
 extern audio_manager* audio;
+extern input_manager* input;
 
 using namespace std;
-extern HWND hwnd;
 
 int Hero::HeroDoor(array<bool, 4> f, int ID, int type_room){ // перемещение игрока между комнатами и взятие предмета
    if(type_room == 3){
@@ -85,32 +86,35 @@ void Hero::DamageEnemy(Enemy arr[4]){ // проверка на нанесени�
       }
    }
 }
-void Hero::Move(){ // движение игрока
-   if(GetForegroundWindow() != hwnd) return;
+void Hero::Move()// движение игрока
+{
    
-   if (GetAsyncKeyState('W') & 0x8000) {
-      y = max(0, y - Speed/2);
-   }
-   if (GetAsyncKeyState('A') & 0x8000) {
-      x = max(57, x - Speed/2);
-   }
-   if (GetAsyncKeyState('S') & 0x8000) {
-      y = min(340, y + Speed/2);
-   }
-   if (GetAsyncKeyState('D') & 0x8000) {
-      x = min(570, x + Speed/2);
-   }
+    if(input->is_pressed(key::W))
+    {
+        y = max(0, y - Speed/2);
+    }
+    if(input->is_pressed(key::A))
+    {
+        x = max(57, x - Speed/2);
+    }
+    if(input->is_pressed(key::S))
+    {
+        y = min(340, y + Speed/2);
+    }
+    if(input->is_pressed(key::D))
+    {
+        x = min(570, x + Speed/2);
+    }
 }
 void Hero::SpearAttack(){ // атака игрока
    if(frameSpear == 0)
    {
-      if(GetForegroundWindow() != hwnd) return;
 
-      std::array<int, 4> keykodes{ VK_DOWN, VK_RIGHT, VK_UP, VK_LEFT };
+      std::array<key, 4> keykodes{ key::DOWN, key::RIGHT, key::UP, key::LEFT };
 
       for(int i = 0; i < keykodes.size(); i++)
       {
-          if(GetAsyncKeyState(keykodes[i]) & 0x8000)
+          if(input->is_pressed(keykodes[i]))
           {
               frameSpear = 1;
               directionSpear = i + 1;

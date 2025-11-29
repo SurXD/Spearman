@@ -50,7 +50,7 @@ void Room::printEnemys(/*Renderer* renderer*/) { // отрисовка враг�
       }
    }
 }
-void Room::initRoom(int x, set_of_rooms a){ // создание комнаты
+void Room::initRoom(int x, set_of_rooms a, int current_floor){ // создание комнаты
    if(x == 4 || x == 2)//начальная комната и комната с предметом
    {
       current_enemy_count = 0; door_open = true;
