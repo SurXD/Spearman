@@ -144,7 +144,7 @@ void Hero::DrawHero(){ // отрисовка игрока и его копья
             putimage(x + 21 - LenghtSpear - frameSpear, y + 47, bmp_basic[directionSpear + 4], TRANSPARENT_PUT);
             putimage(x, y, bmp_basic[directionSpear], TRANSPARENT_PUT);
          }
-      }
+      }//размер древка копья {50;3}
    }
    for(int i = 0; i < 3; i++){
       if(directionSpear == 1){
