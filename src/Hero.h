@@ -8,7 +8,7 @@ class Hero {
       int x, y; // координаты игрока
       int Damage; // урон игрока
       int HP; // здоровье игрока
-      int LenghtSpear; // длина копья
+      int spear_length; // длина копья
       int frameSpear; // номер кадра атаки копья
       int directionSpear; // направление атаки
       int frameNoDamage; // номер кадра неуязвимости
@@ -22,8 +22,8 @@ class Hero {
          y = 300;
          HP = 3;//HP 3
          Speed = 12;
-         Damage = 1000;//DAMAGE 10
-         LenghtSpear = 50;
+         Damage = 10;//DAMAGE 10
+         spear_length = 60;//50
          frameSpear = 0;
          directionSpear = 1;
          frameNoDamage = 0;

@@ -25,5 +25,5 @@ void winbgim_renderer::draw_sprite(sprite* s, const glm::vec2 pos, const glm::ve
 
     freeimage(resized);
     freeimage(rotated);
-    freeimage(mirrored);
+    if(mirroring != sprite_mirroring::NONE) freeimage(mirrored);
 }

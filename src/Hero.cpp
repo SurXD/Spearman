@@ -3,10 +3,13 @@
 #include"Room.h"
 #include "audio/audio_manager.h"
 #include "input/input_manager.h"
+#include "rendering/renderer.h"
 #include <array>
 
 extern audio_manager* audio;
 extern input_manager* input;
+extern resource_manager* res;
+extern renderer* r;
 
 using namespace std;
 
@@ -33,7 +36,7 @@ int Hero::HeroDoor(array<bool, 4> f, int ID, int type_room){ // перемеще
          if(ID == 1) HP += 2;
          if(ID == 2) Damage += 4;
          if(ID == 3) Speed += 2;
-         if(ID == 4) LenghtSpear += 20;
+         if(ID == 4) spear_length += 20;
          Items[nextItem] = bmp_items[2*ID - 2];
          nextItem +=1;
          return 11;
@@ -60,32 +63,29 @@ void Hero::DamageMe(Enemy arr[4], int num){ // проверка на нанес�
    }
    if(frameNoDamage == 30) frameNoDamage = 0;
 }
-void Hero::DamageEnemy(Enemy arr[4]){ // проверка на нанесение урона врагам
-   if(frameSpear == 19){
-      int xa, ya;
-      if(directionSpear == 1){ 
-         xa = x; 
-         ya = y + 37 + LenghtSpear + frameSpear;
-      }
-      else if(directionSpear == 2){ 
-         xa = x + LenghtSpear + frameSpear; 
-         ya = y + 47;
-      }
-      else if(directionSpear == 3){ 
-         xa = x + 22;
-         ya = y + 27 - LenghtSpear - frameSpear;
-      }
-      else if(directionSpear == 4){ 
-         xa = x + 21 - LenghtSpear - frameSpear;
-         ya = y + 47;
-      }
-      for(int i = 0; i < 5; i++){
-            if(arr[i].HP > 0 && xa > arr[i].x - 9 && xa < arr[i].x + 31 && ya < arr[i].y + 72 && ya > arr[i].y - 9){
-            arr[i].HP -= Damage;
-         }
+void Hero::DamageEnemy(Enemy arr[4])// проверка на нанесение урона врагам
+{ 
+   if(frameSpear == 19)
+   {
+      std::array<glm::ivec2, 4> coords{{ 
+          {x + 5, y + 36 + spear_length + frameSpear},
+          {x + spear_length + frameSpear, y + 55},
+          {x + 27, y + 36 - spear_length - frameSpear},
+          {x + 31 - spear_length - frameSpear, y + 55}
+      }};
+
+      glm::ivec2 point = coords[directionSpear - 1];
+
+      for (int i = 0; i < 5; i++) 
+      {
+          if (arr[i].HP > 0 && point.x >= arr[i].x && point.x <= arr[i].x + 31 && point.y >= arr[i].y && point.y <= arr[i].y + 72) 
+          {
+              arr[i].HP -= Damage;
+          }
       }
    }
 }
+
 void Hero::Move()// движение игрока
 {
    
@@ -126,7 +126,32 @@ void Hero::SpearAttack(){ // атака игрока
    else if (frameSpear < 18) frameSpear += 3; 
    else frameSpear = 0;
 }
-void Hero::DrawHero(){ // отрисовка игрока и его копья
+
+void Hero::DrawHero()
+{
+    if(directionSpear == 1)//направление вниз
+    {
+        r->draw_sprite(res->get_sprite("hero_front"), {x, y});
+        r->draw_sprite(res->get_sprite("spear"), {x, y + frameSpear + 36}, { spear_length, 9 }, 270);
+    }
+    if (directionSpear == 2)//направление вправо
+    {
+        r->draw_sprite(res->get_sprite("hero_side"), { x, y });
+        r->draw_sprite(res->get_sprite("spear"), { x + frameSpear, y + 50 }, { spear_length, 9 });
+    }
+    if (directionSpear == 3)//направление вверх
+    {
+        r->draw_sprite(res->get_sprite("spear"), { x + 22, y + 36 - spear_length - frameSpear }, { spear_length, 9 }, 90);
+        r->draw_sprite(res->get_sprite("hero_back"), { x, y });
+    }
+    if (directionSpear == 4)//направление влево
+    {
+        r->draw_sprite(res->get_sprite("spear"), { x + 31 - spear_length - frameSpear, y + 50 }, { spear_length, 9 }, 180);
+        r->draw_sprite(res->get_sprite("hero_side"), { x, y }, {}, 0, sprite_mirroring::HORIZONTAL);
+    }
+}
+
+/*void Hero::DrawHero() { // отрисовка игрока и его копья
    setcolor(RED);
    for(int i = 0; i < 3; i++){
       if(directionSpear == 3){
@@ -164,12 +189,12 @@ void Hero::DrawHero(){ // отрисовка игрока и его копья
          lineto(x + LenghtSpear + frameSpear, y + 50 + i);
       }
    }
-}
+}*/
 void Hero::DrawStats(){ // отрисовка характеристик игрока
    settextstyle(GOTHIC_FONT, HORIZ_DIR, 1);   
    setcolor(BLACK);
    setbkcolor(WHITE);
-   DrawStat(735, 125, HP); DrawStat(735, 180, Speed/2); DrawStat(735, 225, Damage/2); DrawStat(735, 275, LenghtSpear/5);
+   DrawStat(735, 125, HP); DrawStat(735, 180, Speed/2); DrawStat(735, 225, Damage/2); DrawStat(735, 275, spear_length/5);
    setbkcolor(BLACK);
 }
 

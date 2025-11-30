@@ -44,6 +44,10 @@ void load_items_sprites()
         sprintf(s, "./Resources/Textures/Item%d.bmp", i);
         bmp_items[i] = loadBMP(s);
     }
+    res->load_sprite("hero_front", "./Resources/Textures/hero_front.bmp");
+    res->load_sprite("hero_back", "./Resources/Textures/hero_back.bmp");
+    res->load_sprite("hero_side", "./Resources/Textures/hero_side.bmp");
+    res->load_sprite("spear", "./Resources/Textures/spear.bmp");
 }
 
 void load_enemy_sprites()
