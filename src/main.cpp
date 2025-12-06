@@ -9,6 +9,7 @@
 #include "rendering/winbgim_renderer.h"
 #include "state.h"
 #include "game.h"
+#include <chrono>
 
 //int current_floor = 1; // этаж
 //set_of_rooms a; // пул комнат
@@ -26,6 +27,7 @@ int SCREEN_HEIGHT = 480;
 int OFFSET_X = 100;
 int OFFSET_Y = 100;
 //if(input->is_pressed(key::W)) selected--; условно
+constexpr double FRAME_TIME = 1.0f / 24.3902439;
 state  game_state;
 game* g;
 
@@ -120,19 +122,32 @@ int main()
    hwnd = FindWindow(nullptr, "Spearman");
 
    g = new game;
-   int st = 0;
+
+   auto current_time = std::chrono::steady_clock::now();
+
+   double accumulator = 0;
+
 
    while(game_state != state::EXIT)
    {
        w->clear();
        input->pull_events();
 
-       logic();
+       while(accumulator >= FRAME_TIME)
+       {
+           logic();
+           accumulator -= FRAME_TIME;
+       }
        draw();
 
-        delay(41);
-
        w->swap_buffers();
+
+       auto end_time = std::chrono::steady_clock::now();
+       double time_passed = std::chrono::duration<double>(end_time - current_time).count();
+
+       current_time = end_time;
+       if(time_passed >= 25.0f) time_passed = 25.0f;
+       accumulator += time_passed;
    }
 
    /*do
