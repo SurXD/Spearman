@@ -2,8 +2,7 @@
 #include "renderer.h"
 #include "winbgim_sprite.h"
 
-class winbgim_renderer : public renderer
-{
+class winbgim_renderer : public renderer {
 public:
     winbgim_renderer();
     void init() override;

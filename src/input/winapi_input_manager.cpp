@@ -1,9 +1,7 @@
 #include "winapi_input_manager.h"
 
-int winapi_input_manager::key_to_winapi_key(key k)
-{
-    switch (k) 
-    {
+int winapi_input_manager::key_to_winapi_key(key k) {
+    switch (k) {
         case key::LEFT: return VK_LEFT;
         case key::RIGHT: return VK_RIGHT;
         case key::UP: return VK_UP;
@@ -71,19 +69,14 @@ int winapi_input_manager::key_to_winapi_key(key k)
     }
 }
 
-winapi_input_manager::winapi_input_manager()
-{
-}
+winapi_input_manager::winapi_input_manager() {}
 
-bool winapi_input_manager::is_pressed(key k)
-{
+bool winapi_input_manager::is_pressed(key k) {
     return keys[static_cast<size_t>(k)];
 }
 
-void winapi_input_manager::pull_events()
-{
-    for(size_t i = 0; i < KEYS_COUNT; i++)
-    {
+void winapi_input_manager::pull_events() {
+    for(size_t i = 0; i < KEYS_COUNT; i++) {
         int winapi_key = key_to_winapi_key(static_cast<key>(i));
         keys[i] = (GetAsyncKeyState(winapi_key) & 0x8000) != 0;
     }

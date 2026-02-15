@@ -1,18 +1,11 @@
-#include"Textures.h"
-#include"Room.h"
-#include"Hero.h"
-#include"Stage.h"
+#include "textures.h"
 #include "audio/miniaudio_audio_manager.h"
 #include "input/winapi_input_manager.h"
 #include "resource_manager/resource_manager.h"
 #include "window/winbgim_window.h"
 #include "rendering/winbgim_renderer.h"
-#include "state.h"
 #include "game.h"
 #include <chrono>
-
-//int current_floor = 1; // этаж
-//set_of_rooms a; // пул комнат
 
 HWND hwnd;//текущее окно
 
@@ -22,14 +15,14 @@ resource_manager* res = new resource_manager(rendering_type::WINBGIM);
 renderer* r = new winbgim_renderer;
 window* w = new winbgim_window;
 
-int SCREEN_WIDTH = 800;
-int SCREEN_HEIGHT = 480;
+int SCREEN_WIDTH = 810; // +10 т.к окно почему-то съедает 10 пикселей у картинки с обеих сторон
+int SCREEN_HEIGHT = 490; //
 int OFFSET_X = 100;
 int OFFSET_Y = 100;
 //if(input->is_pressed(key::W)) selected--; условно
 constexpr double FRAME_TIME = 1.0f / 24.3902439;
 state  game_state;
-game* g;
+Game* g;
 
 void logic();
 void draw();
@@ -116,25 +109,22 @@ void draw()
     }
 }
 
-int main() 
-{ // основна¤ функци¤
+int main() { // основна¤ функци¤
    init();
    hwnd = FindWindow(nullptr, "Spearman");
 
-   g = new game;
+   g = new Game;
 
    auto current_time = std::chrono::steady_clock::now();
 
    double accumulator = 0;
 
 
-   while(game_state != state::EXIT)
-   {
+   while(game_state != state::EXIT) {
        w->clear();
        input->pull_events();
 
-       while(accumulator >= FRAME_TIME)
-       {
+       while(accumulator >= FRAME_TIME) {
            logic();
            accumulator -= FRAME_TIME;
        }
@@ -149,68 +139,57 @@ int main()
        if(time_passed >= 25.0f) time_passed = 25.0f;
        accumulator += time_passed;
    }
-
-   /*do
-   {
-      st = menu();
-      if(st == 1) game(); 
-      else if(st == 2) about(); 
-      else if(st == 3) rules();     
-   } while(st != 4);*/
    return 0;
 }
 
-void init(){ // инициализаци¤ программы
+void init() { // инициализаци¤ программы
     game_state = state::SCREENSAVER;
     w->create({SCREEN_WIDTH, SCREEN_HEIGHT}, "Spearman");
    //initwindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Spearman", OFFSET_X, OFFSET_Y, true);
    load_menu_sprites(); // инициализаци¤ кнопок меню
    load_items_sprites();
    load_enemy_sprites();
+
+   for (int i = 0; i < kinds_of_enemies.size(); ++i) {
+       kinds_of_enemies[i].set_sprite(bmp_enemy[i]);
+   }   
 }
-void draw_screensaver(){ // заставка игры
+void draw_screensaver() { // заставка игры
    putimage(0, 0, screensaver, COPY_PUT);
 }
 
-void screensaver_logic()
-{
-    for(size_t i = 0; i < KEYS_COUNT; i++)
-    {
+void screensaver_logic() {
+    for(size_t i = 0; i < KEYS_COUNT; i++) {
         key k = static_cast<key>(i);
         if(input->is_pressed(k)) game_state = state::MAIN_MENU;
     }
 }
 
-void about() // об игре 
-{
+void about() { // об игре 
+
     if(input->is_pressed(key::Q)) game_state = state::MAIN_MENU;
 }
 
-void draw_about_screen()
-{
+void draw_about_screen() {
     putimage(0, 0, about_screen, COPY_PUT);
 }
 
-void rules()
-{ // управление
+void rules() { // управление
    if(input->is_pressed(key::Q)) game_state = state::MAIN_MENU;
 }
 
-void draw_rules_screen()
-{
+void draw_rules_screen() {
     putimage(0, 0, rules_screen, COPY_PUT);
 }
 
-void draw_pause()
-{
+void draw_pause() {
     //std::string info = "Этаж: " + std::to_string(current_floor);
     setcolor(RED);
     outtextxy(700 / 2, 450 /2, "пауза");
     //outtextxy(700 / 2, 450 /2 + 30, info.c_str());
 }
 
-void pause()
-{
+void pause() {
     if(input->is_pressed(key::P)) game_state = state::RUNNING;
 }
 

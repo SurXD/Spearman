@@ -4,8 +4,7 @@
 #include "rendering_type.h"
 #include "winbgim_sprite.h"
 
-class sprite_factory
-{
+class sprite_factory {
     sprite_factory() = delete;
     sprite_factory(const sprite_factory&) = delete;
     sprite_factory operator =(const sprite_factory&) = delete;

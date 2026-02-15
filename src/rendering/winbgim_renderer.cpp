@@ -1,17 +1,12 @@
 #include "winbgim_renderer.h"
 
-winbgim_renderer::winbgim_renderer()
-{
+winbgim_renderer::winbgim_renderer() { }
 
-}
-
-void winbgim_renderer::init()
-{
+void winbgim_renderer::init() {
     //empty for winbgim
 }
 
-void winbgim_renderer::draw_sprite(sprite* s, const glm::vec2 pos, const glm::vec2 size, const float angle, const sprite_mirroring mirroring)
-{
+void winbgim_renderer::draw_sprite(sprite* s, const glm::vec2 pos, const glm::vec2 size, const float angle, const sprite_mirroring mirroring) {
     winbgim_sprite* win_sprite = dynamic_cast<winbgim_sprite*>(s);
 
     IMAGE* resized = imageresize(win_sprite->get_data(), size.x, size.y);
