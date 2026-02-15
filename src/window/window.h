@@ -2,8 +2,7 @@
 #include <glm/glm.hpp>
 #include <string>
 
-class window
-{
+class window {
 public:
     window() = default;
     virtual void create(const glm::ivec2 size, const std::string& name) = 0;

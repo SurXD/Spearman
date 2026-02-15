@@ -3,8 +3,7 @@
 
 enum class sprite_mirroring{ NONE, HORIZONTAL, VERTICAL };
 
-class renderer
-{
+class renderer {
 public:
     renderer() = default;
 

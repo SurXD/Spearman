@@ -1,8 +1,7 @@
 #pragma once
 #include"input_types.h"
 
-class input_manager
-{
+class input_manager {
 public:
 	input_manager() = default;
 	virtual bool is_pressed(key k) = 0;

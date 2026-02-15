@@ -2,8 +2,7 @@
 #include <string>
 #include <glm/glm.hpp>
 
-class sprite
-{
+class sprite {
 protected:
     //{width; height}
     glm::ivec2 size;

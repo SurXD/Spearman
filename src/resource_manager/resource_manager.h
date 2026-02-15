@@ -7,8 +7,7 @@
 #include <string>
 #include <iostream>
 
-class resource_manager
-{
+class resource_manager {
     rendering_type backend;
     std::unordered_map<std::string, sound*> sounds;
     std::unordered_map<std::string, sprite*> sprites;

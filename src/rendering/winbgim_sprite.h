@@ -4,8 +4,7 @@
 #include <graphics.h>
 #include <stdexcept>
 
-class winbgim_sprite : public sprite
-{
+class winbgim_sprite : public sprite {
     IMAGE* data;
 public:
     winbgim_sprite() : sprite(), data(nullptr) { }

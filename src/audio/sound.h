@@ -1,8 +1,7 @@
 #pragma once
 #include<string>
 
-class sound
-{
+class sound {
 	const std::string& filename;
 public:
 	sound(const std::string& filename) : filename(filename){ }

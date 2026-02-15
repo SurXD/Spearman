@@ -2,8 +2,7 @@
 
 constexpr int KEYS_COUNT = 58;
 
-enum class key
-{
+enum class key {
 	LEFT, RIGHT, UP, DOWN,
 
 	A, B, C, D, E, F, G, H, I, J, K, L, M,
